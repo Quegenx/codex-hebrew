@@ -14,7 +14,7 @@ export function runMacOSInstaller(payload){
  // Headless acceptance checks use an isolated home and never launch the application.
  if(process.argv.includes('--install-test')){
   const index=process.argv.indexOf('--install-test'),home=process.argv[index+1];
-  if(!home||!/^\/private\/tmp\/codex-hebrew-test-[^/]+$/.test(home))throw Error('Installer tests require an isolated temporary home');
+  if(!home||!/^\/private\/tmp\/ch-test-[^/]+$/.test(home))throw Error('Installer tests require an isolated temporary home');
   console.log(JSON.stringify(installMacOSApplication(payload,{home,sourceApp:process.argv[index+2]||'/Applications/ChatGPT.app'})));return;
  }
  const confirmation=Bun.spawnSync(['/usr/bin/osascript','-e',dialogScript,`Install ChatGPT in Hebrew for this user?\n\nRequires ChatGPT ${payload.targetVersion}. Your original application and conversations stay unchanged. Quit the Hebrew application before updating.`],{stdout:'ignore',stderr:'pipe'});
