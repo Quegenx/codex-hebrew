@@ -1,0 +1,26 @@
+# Local secrets
+.env
+.env.*
+
+# Local agent tooling and operating-system metadata
+.agents/
+/skills-lock.json
+.DS_Store
+
+node_modules/
+.venv/
+__pycache__/
+*.pyc
+catalogs/source/*.json
+catalogs/locales/*.json
+catalogs/native/*.json
+reports/**/*.json
+reports/**/*.jsonl
+reports/**/*.lock
+reports/**/*.log
+*.tmp
+.lab/
+dist/
+reports/**/*.png
+!reports/visual-macos/installed/login.png
+!reports/visual-macos/installed/model-picker.png

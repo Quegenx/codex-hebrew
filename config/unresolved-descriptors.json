@@ -1,0 +1,23 @@
+{
+  "archiveSha256": "64fc2f27d2dddfa968acfacbe5e4e0328071bdc406351ff4a7d18f0b4692c83d",
+  "entries": [
+    {"file":".vite/build/bootstrap-CfJ5wTIB.js","offset":1152,"classification":"supplemental-message","coveredBy":["@messageId:desktop.intelLaunchWarning.quit"],"reason":"Version-pinned module constants are recorded in supplemental-messages.json."},
+    {"file":".vite/build/bootstrap-CfJ5wTIB.js","offset":1200,"classification":"supplemental-message","coveredBy":["@messageId:desktop.intelLaunchWarning.continue"],"reason":"Version-pinned module constants are recorded in supplemental-messages.json."},
+    {"file":".vite/build/bootstrap-CfJ5wTIB.js","offset":1290,"classification":"supplemental-message","coveredBy":["@messageId:desktop.intelLaunchWarning.message"],"reason":"Version-pinned module constants are recorded in supplemental-messages.json."},
+    {"file":".vite/build/bootstrap-CfJ5wTIB.js","offset":1364,"classification":"supplemental-message","coveredBy":["@messageId:desktop.intelLaunchWarning.detail"],"reason":"Version-pinned module constants are recorded in supplemental-messages.json."},
+    {"file":".vite/build/browser-page-preload.js","offset":342538,"classification":"formatter-forwarder","reason":"React Intl FormattedMessage forwards its caller's id and defaultMessage; it defines no message."},
+    {"file":".vite/build/main-BT6ViFC-.js","offset":2666248,"classification":"native-command-record","reason":"The native menu builder forwards command metadata selected at runtime; native IDs are inventoried from the bundled native locale catalogs."},
+    {"file":"webview/assets/app-initial-cadb12d4a15e.js","offset":611979,"classification":"formatter-forwarder","reason":"React Intl FormattedMessage forwards its caller's id and defaultMessage; it defines no message."},
+    {"file":"webview/assets/app-primary-6cd7b8b3f5e3.js","offset":631096,"classification":"formatter-forwarder","reason":"React Intl FormattedMessage forwards its caller's id and defaultMessage; it defines no message."},
+    {"file":"webview/assets/app-primary-6cd7b8b3f5e3.js","offset":5471391,"classification":"covered-source","coveredBy":["skills.scope.team"],"reason":"The id-less Team fallback has the same source as the extracted team-scope message."},
+    {"file":"webview/assets/general-settings-97f7ff015963.js","offset":47076,"classification":"covered-source","coveredBy":["settings.agent.permissionsMode.fullAccess.description"],"reason":"React compiler cache variables forward the concrete descriptor extracted elsewhere in the same build."},
+    {"file":"webview/assets/register-BqqwIOLc-3052887e9d0a.js","offset":205368,"classification":"formatter-forwarder","reason":"React Intl FormattedMessage forwards its caller's id and defaultMessage; it defines no message."},
+    {"file":"webview/assets/remote-conversation-page-4a5925193bd5.js","offset":26140,"classification":"supplemental-message","coveredBy":["codex.remoteConversation.applyDiff.revert"],"reason":"The ID and source use the same runtime condition and are recorded as a version-pinned concrete descriptor."},
+    {"file":"webview/assets/remote-conversation-page-4a5925193bd5.js","offset":26224,"classification":"supplemental-message","coveredBy":["codex.remoteConversation.applyDiff.apply"],"reason":"The ID and source use the same runtime condition and are recorded as a version-pinned concrete descriptor."},
+    {"file":"webview/assets/sidebar-onboarding-checklist-task-config-e05f92d853b1.js","offset":14421,"classification":"runtime-message-record","reason":"The helper selects an ID and localized source from a validated remote onboarding task record."},
+    {"file":"webview/assets/sidebar-onboarding-checklist-task-config-e05f92d853b1.js","offset":14889,"classification":"schema-definition","reason":"The object defines validators for message records and contains no concrete UI message."},
+    {"file":"webview/assets/use-imported-setup-opportunity-83d51b259d00.js","offset":20657,"classification":"schema-definition","reason":"The object defines validators for message records and contains no concrete UI message."},
+    {"file":"webview/assets/use-imported-setup-opportunity-83d51b259d00.js","offset":150472,"classification":"runtime-message-record","reason":"The helper selects an ID and localized source from validated imported-setup metadata."},
+    {"file":"webview/assets/visualization-3709da7bf10f.js","offset":5203,"classification":"covered-source","reason":"The formatter spreads the concrete descriptor table immediately before it; those table entries are extracted independently."}
+  ]
+}

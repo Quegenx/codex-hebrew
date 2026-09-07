@@ -1,0 +1,305 @@
+{
+  "archiveSha256": "64fc2f27d2dddfa968acfacbe5e4e0328071bdc406351ff4a7d18f0b4692c83d",
+  "entries": [
+    {
+      "id": "appgenSettings.customDomains.addDialog.placeholder",
+      "source": "www.example.com",
+      "reason": "Technical placeholder, path, filename, branch name, command/config token, shortcut, acronym, or date/schedule format is preserved verbatim."
+    },
+    {
+      "id": "chatgpt.pythonExecution.streamsLabel",
+      "source": "STDOUT/STDERR",
+      "reason": "Technical placeholder, path, filename, branch name, command/config token, shortcut, acronym, or date/schedule format is preserved verbatim."
+    },
+    {
+      "id": "codex.legal.todo.heading",
+      "source": "// TODO: implement schema",
+      "reason": "Technical placeholder, path, filename, branch name, command/config token, shortcut, acronym, or date/schedule format is preserved verbatim."
+    },
+    {
+      "id": "composer.footer.branchSwitch.createDialog.placeholder",
+      "source": "new-branch",
+      "reason": "Technical placeholder, path, filename, branch name, command/config token, shortcut, acronym, or date/schedule format is preserved verbatim."
+    },
+    {
+      "id": "externalAgentImport.setupDialog.tabs.mcps.v3",
+      "source": "{status, select, ready {MCPs ({count})} other {MCPs}}",
+      "reason": "Technical placeholder, path, filename, branch name, command/config token, shortcut, acronym, or date/schedule format is preserved verbatim."
+    },
+    {
+      "id": "learning-block.glycolysis.event.atp",
+      "source": "ADP → ATP",
+      "reason": "Scientific formula, unit, protocol/register notation, dataset class, or standard nomenclature is preserved in its conventional form."
+    },
+    {
+      "id": "learning-block.glycolysis.event.nadh",
+      "source": "NAD⁺ → NADH",
+      "reason": "Scientific formula, unit, protocol/register notation, dataset class, or standard nomenclature is preserved in its conventional form."
+    },
+    {
+      "id": "learning-block.glycolysis.event.payoff",
+      "source": "NADH + 2 ATP",
+      "reason": "Scientific formula, unit, protocol/register notation, dataset class, or standard nomenclature is preserved in its conventional form."
+    },
+    {
+      "id": "learningBlock.antibodyStructure.fabConstant",
+      "source": "CH1 + CL · Fab",
+      "reason": "Scientific formula, unit, protocol/register notation, dataset class, or standard nomenclature is preserved in its conventional form."
+    },
+    {
+      "id": "learningBlock.antibodyStructure.fcDomains",
+      "source": "CH2 + CH3 · Fc",
+      "reason": "Scientific formula, unit, protocol/register notation, dataset class, or standard nomenclature is preserved in its conventional form."
+    },
+    {
+      "id": "learningBlock.antibodyStructure.focus.regions",
+      "source": "Fab / Fc",
+      "reason": "Scientific formula, unit, protocol/register notation, dataset class, or standard nomenclature is preserved in its conventional form."
+    },
+    {
+      "id": "learningBlock.calvinCycle.reductionEnergy",
+      "source": "6 ATP + 6 NADPH",
+      "reason": "Scientific formula, unit, protocol/register notation, dataset class, or standard nomenclature is preserved in its conventional form."
+    },
+    {
+      "id": "learningBlock.calvinCycle.reductionReturns",
+      "source": "→ 6 ADP + 6 NADP⁺",
+      "reason": "Scientific formula, unit, protocol/register notation, dataset class, or standard nomenclature is preserved in its conventional form."
+    },
+    {
+      "id": "learningBlock.cellularRespirationOverview.glycolysisYield",
+      "source": "2 ATP · 2 NADH",
+      "reason": "Scientific formula, unit, protocol/register notation, dataset class, or standard nomenclature is preserved in its conventional form."
+    },
+    {
+      "id": "learningBlock.classificationTree.classLabel",
+      "source": "{value, select, setosa {Setosa} versicolor {Versicolor} other {Virginica}}",
+      "reason": "Scientific formula, unit, protocol/register notation, dataset class, or standard nomenclature is preserved in its conventional form."
+    },
+    {
+      "id": "learningBlock.co2Temperature.axis.co2",
+      "source": "CO2 (ppm)",
+      "reason": "Scientific formula, unit, protocol/register notation, dataset class, or standard nomenclature is preserved in its conventional form."
+    },
+    {
+      "id": "learningBlock.cpuFetchDecodeExecute.step.cir",
+      "source": "MDR → CIR: {instruction}.",
+      "reason": "Scientific formula, unit, protocol/register notation, dataset class, or standard nomenclature is preserved in its conventional form."
+    },
+    {
+      "id": "learningBlock.epspIpspSummation.option.inhibited",
+      "source": "EPSPs + IPSP",
+      "reason": "Scientific formula, unit, protocol/register notation, dataset class, or standard nomenclature is preserved in its conventional form."
+    },
+    {
+      "id": "learningBlock.erDiagram.cue.propagate",
+      "source": "3 · inst_id → Course (FK)",
+      "reason": "Scientific formula, unit, protocol/register notation, dataset class, or standard nomenclature is preserved in its conventional form."
+    },
+    {
+      "id": "learningBlock.eukaryoticGeneRegulation.label.complex",
+      "source": "Mediator · TFs · Pol II",
+      "reason": "Scientific formula, unit, protocol/register notation, dataset class, or standard nomenclature is preserved in its conventional form."
+    },
+    {
+      "id": "learningBlock.faradaysLawElectrolysis.caption",
+      "source": "{charge} kC → {electrons} mol e⁻ → {metalMoles} mol {metal} · Ag {silver} g · Cu {copper} g",
+      "reason": "Scientific formula, unit, protocol/register notation, dataset class, or standard nomenclature is preserved in its conventional form."
+    },
+    {
+      "id": "learningBlock.fermentation.visual.nadhUsed",
+      "source": "2 NADH → 2 NAD+",
+      "reason": "Scientific formula, unit, protocol/register notation, dataset class, or standard nomenclature is preserved in its conventional form."
+    },
+    {
+      "id": "learningBlock.firmCostCurvesV5.caption",
+      "source": "Q = {output}: MC {mc} {avcRelation} AVC {avc} → AVC {avcDirection}; MC {atcRelation} ATC {atc} → ATC {atcDirection} · AFC {afc}",
+      "reason": "Scientific formula, unit, protocol/register notation, dataset class, or standard nomenclature is preserved in its conventional form."
+    },
+    {
+      "id": "learningBlock.foreignExchangeMarketV6.baselineTransaction",
+      "source": "USD ↔ MXN",
+      "reason": "Scientific formula, unit, protocol/register notation, dataset class, or standard nomenclature is preserved in its conventional form."
+    },
+    {
+      "id": "learningBlock.gpcrSignaling.visual.alpha.gdp",
+      "source": "G-alpha-GDP",
+      "reason": "Scientific formula, unit, protocol/register notation, dataset class, or standard nomenclature is preserved in its conventional form."
+    },
+    {
+      "id": "learningBlock.gpcrSignaling.visual.alpha.gtp",
+      "source": "G-alpha-GTP",
+      "reason": "Scientific formula, unit, protocol/register notation, dataset class, or standard nomenclature is preserved in its conventional form."
+    },
+    {
+      "id": "learningBlock.gpcrSignaling.visual.betaGamma",
+      "source": "G-beta-gamma",
+      "reason": "Scientific formula, unit, protocol/register notation, dataset class, or standard nomenclature is preserved in its conventional form."
+    },
+    {
+      "id": "learningBlock.gpcrSignaling.visual.effector.plc",
+      "source": "PLC-beta",
+      "reason": "Scientific formula, unit, protocol/register notation, dataset class, or standard nomenclature is preserved in its conventional form."
+    },
+    {
+      "id": "learningBlock.krebsCycle.gtpOutput",
+      "source": "GTP/ATP",
+      "reason": "Scientific formula, unit, protocol/register notation, dataset class, or standard nomenclature is preserved in its conventional form."
+    },
+    {
+      "id": "learningBlock.krebsCycle.oxidationOutput",
+      "source": "NADH + CO₂",
+      "reason": "Scientific formula, unit, protocol/register notation, dataset class, or standard nomenclature is preserved in its conventional form."
+    },
+    {
+      "id": "learningBlock.lacOperon.capBound",
+      "source": "CAP-cAMP",
+      "reason": "Scientific formula, unit, protocol/register notation, dataset class, or standard nomenclature is preserved in its conventional form."
+    },
+    {
+      "id": "learningBlock.marginalAnalysisV5.equalityLabel",
+      "source": "MB = MC",
+      "reason": "Scientific formula, unit, protocol/register notation, dataset class, or standard nomenclature is preserved in its conventional form."
+    },
+    {
+      "id": "learningBlock.monopolyPricingV5.marginalEqualityLabel",
+      "source": "MR = MC = {value}",
+      "reason": "Scientific formula, unit, protocol/register notation, dataset class, or standard nomenclature is preserved in its conventional form."
+    },
+    {
+      "id": "learningBlock.newmanProjections.butaneCaption",
+      "source": "{conformation} · CH₃-CH₃ {dihedral}° · {stability}",
+      "reason": "Scientific formula, unit, protocol/register notation, dataset class, or standard nomenclature is preserved in its conventional form."
+    },
+    {
+      "id": "learningBlock.particulateMatterSize.class.both",
+      "source": "PM2.5 + PM10",
+      "reason": "Scientific formula, unit, protocol/register notation, dataset class, or standard nomenclature is preserved in its conventional form."
+    },
+    {
+      "id": "learningBlock.particulateMatterSize.inset.cutoffs",
+      "source": "PM10 ≤{pm10} · PM2.5 ≤{pm25} μm",
+      "reason": "Scientific formula, unit, protocol/register notation, dataset class, or standard nomenclature is preserved in its conventional form."
+    },
+    {
+      "id": "learningBlock.pupillaryLightReflexV2.label.cnIII",
+      "source": "CN III",
+      "reason": "Scientific formula, unit, protocol/register notation, dataset class, or standard nomenclature is preserved in its conventional form."
+    },
+    {
+      "id": "learningBlock.pythonRangeForLoop.startEqualsStop",
+      "source": "start = stop ×",
+      "reason": "Scientific formula, unit, protocol/register notation, dataset class, or standard nomenclature is preserved in its conventional form."
+    },
+    {
+      "id": "learningBlock.qtProlongationTorsades.torsadesPreview",
+      "source": "Torsades de pointes",
+      "reason": "Scientific formula, unit, protocol/register notation, dataset class, or standard nomenclature is preserved in its conventional form."
+    },
+    {
+      "id": "learningBlock.radiometricDating.clock.potassium",
+      "source": "K-40 → Ca-40 + Ar-40",
+      "reason": "Scientific formula, unit, protocol/register notation, dataset class, or standard nomenclature is preserved in its conventional form."
+    },
+    {
+      "id": "learningBlock.soilTextureAndWaterRetention.controls.suctionUnit",
+      "source": "log₁₀ kPa",
+      "reason": "Scientific formula, unit, protocol/register notation, dataset class, or standard nomenclature is preserved in its conventional form."
+    },
+    {
+      "id": "learningBlock.soilTextureAndWaterRetention.thumbnail.thresholds",
+      "source": "FC · PWP",
+      "reason": "Scientific formula, unit, protocol/register notation, dataset class, or standard nomenclature is preserved in its conventional form."
+    },
+    {
+      "id": "learningBlock.survivorshipCurves.caption",
+      "source": "{age}% · I {typeI}, II {typeII}, III {typeIII} / 1,000 · {timing}",
+      "reason": "Scientific formula, unit, protocol/register notation, dataset class, or standard nomenclature is preserved in its conventional form."
+    },
+    {
+      "id": "learningBlock.tcpThreeWayHandshake.detail.ack",
+      "source": "seq=x+1 ({sequence}) ack=y+1 ({acknowledgment})",
+      "reason": "Scientific formula, unit, protocol/register notation, dataset class, or standard nomenclature is preserved in its conventional form."
+    },
+    {
+      "id": "learningBlock.tcpThreeWayHandshake.detail.synAck",
+      "source": "seq=y ({sequence}) ack=x+1 ({acknowledgment})",
+      "reason": "Scientific formula, unit, protocol/register notation, dataset class, or standard nomenclature is preserved in its conventional form."
+    },
+    {
+      "id": "learningBlock.waterPhaseDiagram.axis.pressure",
+      "source": "P · log₁₀(kPa)",
+      "reason": "Scientific formula, unit, protocol/register notation, dataset class, or standard nomenclature is preserved in its conventional form."
+    },
+    {
+      "id": "localConversation.moveToHostWorktree.modal.branchPlaceholder",
+      "source": "new-branch",
+      "reason": "Technical placeholder, path, filename, branch name, command/config token, shortcut, acronym, or date/schedule format is preserved verbatim."
+    },
+    {
+      "id": "localConversation.moveToWorktree.modal.worktreeBranchPlaceholder",
+      "source": "new-branch",
+      "reason": "Technical placeholder, path, filename, branch name, command/config token, shortcut, acronym, or date/schedule format is preserved verbatim."
+    },
+    {
+      "id": "rna-processing.pre-mrna",
+      "source": "Pre-mRNA",
+      "reason": "Scientific formula, unit, protocol/register notation, dataset class, or standard nomenclature is preserved in its conventional form."
+    },
+    {
+      "id": "security.scanSetup.folderScope.placeholder",
+      "source": "src/server",
+      "reason": "Technical placeholder, path, filename, branch name, command/config token, shortcut, acronym, or date/schedule format is preserved verbatim."
+    },
+    {
+      "id": "security.scanSetup.revision.placeholder",
+      "source": "{revision, select, base {origin/main} commit {HEAD} head {HEAD} other {HEAD}}",
+      "reason": "Technical placeholder, path, filename, branch name, command/config token, shortcut, acronym, or date/schedule format is preserved verbatim."
+    },
+    {
+      "id": "settings.agent.configuration.configToml",
+      "source": "config.toml",
+      "reason": "Technical placeholder, path, filename, branch name, command/config token, shortcut, acronym, or date/schedule format is preserved verbatim."
+    },
+    {
+      "id": "settings.appshotHotkey.option.windowsAlt",
+      "source": "Alt + Alt",
+      "reason": "Technical placeholder, path, filename, branch name, command/config token, shortcut, acronym, or date/schedule format is preserved verbatim."
+    },
+    {
+      "id": "settings.appshotHotkey.option.windowsShift",
+      "source": "Shift + Shift",
+      "reason": "Technical placeholder, path, filename, branch name, command/config token, shortcut, acronym, or date/schedule format is preserved verbatim."
+    },
+    {
+      "id": "settings.automations.scheduleCustomPlaceholder",
+      "source": "RRULE:FREQ=MONTHLY;BYMONTHDAY=1;BYHOUR=9;BYMINUTE=0",
+      "reason": "Technical placeholder, path, filename, branch name, command/config token, shortcut, acronym, or date/schedule format is preserved verbatim."
+    },
+    {
+      "id": "settings.browserUse.domains.addDialogPlaceholder",
+      "source": "example.com",
+      "reason": "Technical placeholder, path, filename, branch name, command/config token, shortcut, acronym, or date/schedule format is preserved verbatim."
+    },
+    {
+      "id": "settings.chatGpt.birthday.placeholder",
+      "source": "MM / DD / YYYY",
+      "reason": "Technical placeholder, path, filename, branch name, command/config token, shortcut, acronym, or date/schedule format is preserved verbatim."
+    },
+    {
+      "id": "settings.chatGpt.cloudBrowser.sitePlaceholder",
+      "source": "example.com",
+      "reason": "Technical placeholder, path, filename, branch name, command/config token, shortcut, acronym, or date/schedule format is preserved verbatim."
+    },
+    {
+      "id": "settings.chronicle.permissions.domainPlaceholder",
+      "source": "example.com",
+      "reason": "Technical placeholder, path, filename, branch name, command/config token, shortcut, acronym, or date/schedule format is preserved verbatim."
+    },
+    {
+      "id": "skills.appsPage.addMarketplace.sparsePathsPlaceholder",
+      "source": "plugins/codex",
+      "reason": "Technical placeholder, path, filename, branch name, command/config token, shortcut, acronym, or date/schedule format is preserved verbatim."
+    }
+  ]
+}

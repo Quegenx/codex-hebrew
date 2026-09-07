@@ -1,0 +1,22 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import crypto from 'node:crypto';
+import {fileURLToPath} from 'node:url';
+import {openAsar} from '../analysis/asar-archive.mjs';
+
+const root=fileURLToPath(new URL('../../',import.meta.url));
+const resources=path.dirname(process.argv[2]||'/Applications/ChatGPT.app/Contents/Resources/app.asar');
+const codex=[path.join(resources,'codex'),path.join(resources,'codex.exe')].find(fs.existsSync),configuration=JSON.parse(fs.readFileSync(`${root}config/agent-language.json`,'utf8'));
+if(!codex)throw Error(`Bundled Codex executable not found in ${resources}`);
+const directory=`${root}.lab/agent-language-check`;fs.rmSync(directory,{recursive:true,force:true});fs.mkdirSync(directory,{recursive:true,mode:0o700});
+fs.writeFileSync(path.join(directory,'config.toml'),`developer_instructions = ${JSON.stringify(configuration.developerInstructions)}\n`,{mode:0o600});
+const input=Bun.spawnSync([codex,'debug','prompt-input','Return the word ready.'],{env:{...process.env,CODEX_HOME:directory},cwd:root,stdout:'pipe',stderr:'pipe'});
+if(input.exitCode!==0)throw Error(`Codex configuration proof failed: ${input.stderr.toString().trim()}`);
+const items=JSON.parse(input.stdout.toString()),supported=items.some(item=>item.role==='developer'&&item.content?.some(content=>content.type==='input_text'&&content.text===configuration.developerInstructions));
+const versionRun=Bun.spawnSync([codex,'--version'],{stdout:'pipe',stderr:'ignore'}),version=versionRun.stdout.toString().trim();
+const runtime=JSON.parse(fs.readFileSync(`${root}reports/hebrew-agent-response.json`,'utf8'));
+const instructionSha256=crypto.createHash('sha256').update(configuration.developerInstructions).digest('hex');
+const current=runtime.archiveSha256===openAsar(path.join(resources,'app.asar')).hash&&runtime.codexVersion===version&&runtime.codexSha256===crypto.createHash('sha256').update(fs.readFileSync(codex)).digest('hex')&&runtime.instructionSha256===instructionSha256;
+const hebrew=/[\u0590-\u05ff]/u.test(runtime.output),complete=supported&&current&&runtime.ephemeral===true&&runtime.syntheticPrompt===true&&hebrew;
+console.log(JSON.stringify({complete,supportedConfig:supported,currentRuntimeEvidence:current,hebrewOutput:hebrew,evidence:'reports/hebrew-agent-response.json'}));
+if(!complete)process.exitCode=1;

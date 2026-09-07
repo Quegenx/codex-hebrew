@@ -1,0 +1,20 @@
+import fs from 'node:fs';
+import {fileURLToPath} from 'node:url';
+import {readHebrewCatalog,writeHebrewCatalog} from './hebrew-catalog.mjs';
+const root = fileURLToPath(new URL('../../', import.meta.url));
+const locale = process.argv[2] || 'he';
+if (!/^[a-z]{2,3}(?:-[A-Za-z0-9]{2,8})*$/.test(locale)) throw new Error('Invalid locale');
+if(locale!=='he')throw new Error('This project has one canonical Hebrew catalog');
+if(fs.existsSync(`${root}reports/bulk-${locale}.lock`))throw new Error('Wait for the active bulk translation before preparing this catalog.');
+const source = JSON.parse(fs.readFileSync(`${root}catalogs/source/en.json`, 'utf8'));
+const previous = readHebrewCatalog();
+const old = new Map(previous.messages.map(m => [m.id, m]));
+const messages = source.messages.map(m => {
+  const prior = old.get(m.id);
+  old.delete(m.id);
+  if (prior?.sourceHash === m.sourceHash) return {...prior, source:m.source, description:m.description};
+  return {id:m.id, ...(m.originalId ? {originalId:m.originalId,descriptorKind:m.descriptorKind} : {}), ...(m.sourceLocale?{sourceLocale:m.sourceLocale}:{}), source:m.source, description:m.description, sourceHash:m.sourceHash, translation:prior?.translation || '', status:prior ? 'needs-review' : 'untranslated'};
+});
+for (const prior of old.values()) messages.push({...prior, status:'obsolete'});
+previous.locale=locale;previous.archiveSha256=source.archiveSha256;previous.messages=messages;writeHebrewCatalog(previous);
+console.log(`${locale}: ${messages.length} entries prepared. Existing translations preserved; changed sources require review.`);

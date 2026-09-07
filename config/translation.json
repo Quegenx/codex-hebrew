@@ -1,0 +1,10 @@
+{
+  "provider": "openai",
+  "modelEnvironmentVariable": "OPENAI_MODEL",
+  "endpoint": "https://api.openai.com/v1/responses",
+  "outputFormat": "json_schema",
+  "store": false,
+  "defaultSampleSize": 3,
+  "newTranslationStatus": "draft",
+  "integrationStatus": "sample-translator-implemented"
+}

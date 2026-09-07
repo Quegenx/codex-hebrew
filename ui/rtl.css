@@ -1,0 +1,171 @@
+/* Logical layout: row flex follows inherited direction; never reverse all rows. */
+html[data-chatgpt-rtl] {
+  direction: rtl;
+  --font-sans-default: "Heebo", sans-serif;
+  --font-sans: "Heebo", sans-serif;
+  --font-content: "Heebo", sans-serif;
+  --font-openai-sans: "Heebo", sans-serif;
+  --oai-wb-font-sans: "Heebo", sans-serif;
+  --vscode-font-family: "Heebo", sans-serif;
+  font-family: "Heebo", sans-serif;
+}
+html[data-chatgpt-rtl] body { text-align: start; }
+html[data-chatgpt-rtl] :where(body, button, input, textarea, select) {
+  font-family: "Heebo", sans-serif;
+}
+/* The upstream text shimmer advances in 48 discrete steps, which reads as
+   dropped frames on high-refresh displays. Keep its path and duration while
+   allowing Chromium to interpolate every frame. */
+html[data-chatgpt-rtl] :where(.loading-shimmer, .loading-shimmer-pure-text, .loading-shimmer-pure-text-inverted) {
+  animation-timing-function: linear !important;
+  will-change: background-position;
+}
+/* Radix portals own their direction and may explicitly default to ltr.
+   The shipped menu's children are already in leading-icon / label / trailing
+   order and use logical ms/pe spacing. Change direction, not row order. */
+html[data-chatgpt-rtl] :where([role="menu"], [role="menubar"]) {
+  direction: rtl !important;
+  text-align: start;
+}
+html[data-chatgpt-rtl] :where([role="menuitem"], [role="menuitemcheckbox"], [role="menuitemradio"], [data-menu-row-content]) {
+  direction: rtl;
+  text-align: start;
+}
+/* The model picker's default row renders its selected icon after the label.
+   Put that trailing DOM child on the physical right in the RTL model list. */
+html[data-chatgpt-rtl] [data-model-picker-view] [role="menuitemradio"][aria-checked="true"] > [data-menu-row-content] {
+  flex-direction: row-reverse;
+}
+/* Shared menu SubContent inserts a plain dir=ltr div around all its items.
+   Restore chrome direction at that wrapper; shortcut isolation below wins. */
+html[data-chatgpt-rtl] [role="menu"] div[dir="ltr"]:has([role^="menuitem"]) {
+  direction: rtl;
+}
+/* Chromium places a vertical scrollbar on the inline start of an RTL scroll
+   container. Keep the content RTL while the scroll mechanism stays on right. */
+html[data-chatgpt-rtl] [data-rtl-scrollbar-right] {
+  direction: ltr !important;
+}
+html[data-chatgpt-rtl] [data-rtl-scrollbar-right] > * {
+  direction: rtl;
+}
+html[data-chatgpt-rtl] input[type="file"][data-rtl-file-input] {
+  direction: rtl !important;
+  font-size: 0 !important;
+}
+html[data-chatgpt-rtl] input[type="file"][data-rtl-file-input]::file-selector-button {
+  font-size: 0.8125rem !important;
+}
+html[data-chatgpt-rtl] [data-rtl-file-name] {
+  margin-inline-start: 0.5rem;
+  direction: auto;
+  unicode-bidi: isolate;
+}
+/* dir=auto keeps a Latin account name in reading order, but it also makes
+   text-align:start resolve to the left. Keep both account rows at RTL start. */
+html[data-chatgpt-rtl] [data-rtl-profile-account],
+html[data-chatgpt-rtl] [data-rtl-profile-account-menuitem] {
+  direction: rtl;
+  text-align: right !important;
+}
+html[data-chatgpt-rtl] :is([data-rtl-profile-account], [data-rtl-profile-account-menuitem]) :where([dir="auto"], .truncate, .truncate-text) {
+  text-align: right !important;
+}
+html[data-chatgpt-rtl] [data-ebrew-credit] {
+  overflow: hidden;
+  padding: 0.25rem 0.75rem;
+  color: currentColor;
+  font-size: 0.6875rem;
+  line-height: 1rem;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  opacity: 0.55;
+  pointer-events: none;
+  user-select: none;
+}
+/* Scheduled-task metadata: the unshrinkable relative-time label used to
+   squeeze the preceding schedule down to one glyph and an ellipsis.
+   Keep each metadata segment readable and let the next-run segment wrap. */
+html[data-chatgpt-rtl] span.inline-flex.max-w-full.items-center.gap-1\.5.overflow-hidden.whitespace-nowrap:has(> span.inline-flex.shrink-0.gap-1) {
+  display: flex;
+  flex-wrap: wrap;
+  white-space: normal;
+  overflow: visible;
+  row-gap: 0.125rem;
+}
+html[data-chatgpt-rtl] span.inline-flex.max-w-full.items-center.gap-1\.5.overflow-hidden.whitespace-nowrap:has(> span.inline-flex.shrink-0.gap-1) > span.min-w-0.truncate {
+  flex: 0 1 auto;
+  max-inline-size: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  overflow: visible;
+  text-overflow: clip;
+  unicode-bidi: isolate;
+}
+html[data-chatgpt-rtl] span.inline-flex.max-w-full.items-center.gap-1\.5.overflow-hidden.whitespace-nowrap > span.inline-flex.shrink-0.gap-1 {
+  flex-shrink: 1;
+  flex-wrap: wrap;
+  min-inline-size: 0;
+  unicode-bidi: isolate;
+}
+/* SelectableListRow and scheduled-task hover actions reserve logical end
+   padding, but their absolutely positioned trailing rail uses right:0. */
+html[data-chatgpt-rtl] div.absolute.top-1\/2.right-0.flex.min-h-6.-translate-y-1\/2.items-center.text-base.text-codex-description,
+html[data-chatgpt-rtl] span.pointer-events-none.absolute.right-0.inline-flex.items-center.justify-end {
+  right: auto;
+  inset-inline-end: 0;
+}
+/* T6i's keyboardShortcut span is not a <kbd>. Preserve shortcut glyph order
+   while its trailing flex slot moves to the left with the RTL menu row. */
+html[data-chatgpt-rtl] [role^="menuitem"] span[class~="ms-2"][class~="shrink-0"][class~="text-xs"] {
+  direction: ltr;
+  unicode-bidi: isolate;
+  text-align: left;
+}
+html[data-chatgpt-rtl] :where(pre, code, kbd, samp, input[type="url"], input[type="email"], [data-rtl-ltr], [data-codex-terminal], [data-codex-xterm], dil-renderer, .xterm, .monaco-editor, .cm-editor) {
+  direction: ltr;
+  unicode-bidi: isolate;
+  text-align: left;
+}
+html[data-chatgpt-rtl] :where(input:placeholder-shown:not([type="url"]):not([type="email"]), textarea:placeholder-shown) {
+  direction: rtl;
+  text-align: start;
+}
+html[data-chatgpt-rtl] .ProseMirror .placeholder:after {
+  direction: rtl;
+  text-align: start;
+}
+html[data-chatgpt-rtl] .ProseMirror[contenteditable="true"] {
+  text-align: start;
+}
+html[data-chatgpt-rtl] .ProseMirror[contenteditable="true"]:has(> p[data-placeholder]:only-child > br.ProseMirror-trailingBreak:only-child) {
+  direction: rtl;
+}
+html[data-chatgpt-rtl] .ProseMirror[contenteditable="true"]:has(> p[data-placeholder]:only-child > br.ProseMirror-trailingBreak:only-child) > p[data-placeholder] {
+  direction: rtl;
+  unicode-bidi: isolate;
+  text-align: right;
+}
+/* Keep stored and copied message text in logical order. Chromium applies the
+   Unicode BiDi algorithm independently to each prose block; technical spans
+   retain the isolated LTR rule above. */
+html[data-chatgpt-rtl] :where(
+  [data-rtl-user-content],
+  :is([data-markdown-text-tone="user-message"], [data-markdown-text-style="assistant-message"], [data-message-author-role]),
+  :is([data-markdown-text-tone="user-message"], [data-markdown-text-style="assistant-message"], [data-message-author-role]) :is(p, li, blockquote, h1, h2, h3, h4, h5, h6, td, th),
+  [data-codex-composer] :is(p, li, blockquote, h1, h2, h3, h4, h5, h6)
+) {
+  unicode-bidi: plaintext;
+  text-align: start;
+}
+/* Per-cell start alignment makes adjacent Hebrew and English cells converge
+   on the same column boundary. Align a table as one reading surface while
+   each cell keeps its own BiDi character order. */
+html[data-chatgpt-rtl] :is([data-markdown-text-tone="user-message"], [data-markdown-text-style="assistant-message"], [data-message-author-role]) table[dir="rtl"] :is(th, td) {
+  text-align: right;
+}
+html[data-chatgpt-rtl] :is([data-markdown-text-tone="user-message"], [data-markdown-text-style="assistant-message"], [data-message-author-role]) table[dir="ltr"] :is(th, td) {
+  text-align: left;
+}
+html[data-chatgpt-rtl] [data-rtl-mirror] { transform: scaleX(-1); }

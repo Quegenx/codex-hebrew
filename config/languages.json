@@ -1,0 +1,15 @@
+{
+  "sourceLocale": "en",
+  "defaultLocale": "he",
+  "locales": {
+    "en": { "label": "English", "direction": "ltr" },
+    "he": { "label": "עברית", "direction": "rtl" }
+  },
+  "layoutPolicy": {
+    "codeDirection": "ltr",
+    "urlDirection": "ltr",
+    "pathDirection": "ltr",
+    "userContentDirection": "auto"
+  },
+  "integrationStatus": "planned"
+}

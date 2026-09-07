@@ -1,0 +1,15 @@
+{
+  "archiveSha256": "64fc2f27d2dddfa968acfacbe5e4e0328071bdc406351ff4a7d18f0b4692c83d",
+  "evidence": "Manually verified literal module constants and formatMessage call sites in .vite/build/bootstrap-CfJ5wTIB.js. The conservative resolver rejects these short names because unrelated nested scopes reuse them.",
+  "file": ".vite/build/bootstrap-CfJ5wTIB.js",
+  "messages": [
+    {"originalId":"desktop.intelLaunchWarning.message","source":"{appName} is running the Intel build on an Apple Silicon Mac"},
+    {"originalId":"desktop.intelLaunchWarning.detail","source":"This build works through Rosetta, but the Apple Silicon build launches faster and performs better. Quit now to install the Apple Silicon build, or continue with the Intel build"},
+    {"originalId":"desktop.intelLaunchWarning.quit","source":"Quit"},
+    {"originalId":"desktop.intelLaunchWarning.continue","source":"Continue Anyway"},
+    {"id":"codex.remoteConversation.applyDiff.revert","source":"Revert","description":"Button to revert a remote diff locally","file":"webview/assets/remote-conversation-page-4a5925193bd5.js"},
+    {"id":"codex.remoteConversation.applyDiff.apply","source":"Apply","description":"Button to apply a remote diff locally","file":"webview/assets/remote-conversation-page-4a5925193bd5.js"},
+    {"id":"settings.agent.permissionsMode.fullAccess.description","source":"When ChatGPT runs with full access, it can edit any file on your computer and run commands with network, without your approval. This significantly increases the risk of data loss, leaks, or unexpected behavior. <a>Learn more</a> about elevated risks.","description":"Description for full access permissions mode","file":"webview/assets/general-settings-97f7ff015963.js"},
+    {"originalId":"threadHeader.copySessionId","source":"نسخ معرف الجلسة","sourceLocale":"ar","file":"native-menu-locales/ar.json","description":"Native menu entry sourced from the bundled Arabic catalog because no English descriptor was located. Means copying the session identifier."}
+  ]
+}
