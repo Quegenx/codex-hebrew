@@ -1,6 +1,6 @@
-# ChatGPT eBrew — Agent Instructions
+# Codex Hebrew — Agent Instructions
 
-This repository contains ChatGPT eBrew, a Hebrew and RTL adaptation of ChatGPT Desktop. The repository root is the application root. Work only on applications the user owns or is authorized to analyze, using reversible changes and isolated profiles.
+This repository contains Codex Hebrew, a Hebrew and RTL adaptation of ChatGPT Desktop. The repository root is the application root. Work only on applications the user owns or is authorized to analyze, using reversible changes and isolated profiles.
 
 ## Setup
 
@@ -8,7 +8,7 @@ This repository contains ChatGPT eBrew, a Hebrew and RTL adaptation of ChatGPT D
 - Keep application files at this root, grouped under `scripts/`, `runtime/`, `ui/`, `assets/`, `tests/`, `catalogs/`, `config/`, `docs/`, and `reports/`. Do not recreate platform or nested project containers.
 - Read `README.md` for the source layout and commands, and `docs/feasibility.md` for application constraints.
 - Run `bun run check:structure` and `bun test` from this root after structural changes. Maintained source files must not exceed 300 lines. Translation catalogs are exempt and must remain unchanged unless translation edits are explicitly requested.
-- Preserve installed application identifiers and profile paths unless an explicit migration is requested; the project name is ChatGPT eBrew.
+- Preserve installed application identifiers and profile paths unless an explicit migration is requested; the project name is Codex Hebrew.
 
 ## Workflow
 

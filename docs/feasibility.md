@@ -1,4 +1,4 @@
-# ChatGPT eBrew wrapper feasibility
+# Codex Hebrew wrapper feasibility
 
 The installed target is an arm64 Electron application with React Intl catalogs, native-menu locale catalogs, a Radix direction context, and packaged renderer CSS. Reviewed observations and target hashes are recorded in [runtime evidence](../reports/RUNTIME.md). `bun run target:status` generates the local `reports/target-current.json`; raw inspection reports are not published.
 

@@ -21,13 +21,13 @@ No API key, `.env` file, or translation generation is needed. The build uses the
 
 The installer verifies the installed target, prepares a separate app and runtime, verifies the app signature, then replaces the two destinations with rollback on failure. It preserves existing profile data and `codex-home/config.toml`. Installations are serialized with a lock. An interrupted process can leave a lock or backup requiring manual recovery; the installer does not delete these automatically.
 
-The Hebrew launcher forces Electron and AppKit into RTL before native menus are created. It also disables the copied OpenAI Sparkle updater; compatible Hebrew updates are delivered only through a new version-pinned eBrew installer.
+The Hebrew launcher forces Electron and AppKit into RTL before native menus are created. It also disables the copied OpenAI Sparkle updater; compatible Hebrew updates are delivered only through a new version-pinned Codex Hebrew installer.
 
 `install:app` and `update` build and open this same installer. There is no separate source-only installation path.
 
 Build outputs are in `dist/installers/`:
 
-- `ChatGPT-eBrew-macOS-arm64.dmg`
+- `Codex-Hebrew-macOS-arm64.dmg`
 - `SHA256SUMS`
 - `release-manifest.json`, recording the supported target and signing state
 

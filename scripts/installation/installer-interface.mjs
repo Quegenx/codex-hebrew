@@ -1,10 +1,10 @@
 import {installMacOSApplication} from './macos-installer.mjs';
 
 const dialogScript=`on run argv
- display dialog (item 1 of argv) with title "ChatGPT eBrew" buttons {"Cancel", "Install"} default button "Install" cancel button "Cancel"
+ display dialog (item 1 of argv) with title "Codex Hebrew" buttons {"Cancel", "Install"} default button "Install" cancel button "Cancel"
 end run`;
 const messageScript=`on run argv
- display dialog (item 1 of argv) with title "ChatGPT eBrew" buttons {"OK"} default button "OK"
+ display dialog (item 1 of argv) with title "Codex Hebrew" buttons {"OK"} default button "OK"
 end run`;
 
 export function runMacOSInstaller(payload){
@@ -14,12 +14,12 @@ export function runMacOSInstaller(payload){
  // Headless acceptance checks use an isolated home and never launch the application.
  if(process.argv.includes('--install-test')){
   const index=process.argv.indexOf('--install-test'),home=process.argv[index+1];
-  if(!home||!/^\/private\/tmp\/ebrew-test-[^/]+$/.test(home))throw Error('Installer tests require an isolated temporary home');
+  if(!home||!/^\/private\/tmp\/codex-hebrew-test-[^/]+$/.test(home))throw Error('Installer tests require an isolated temporary home');
   console.log(JSON.stringify(installMacOSApplication(payload,{home,sourceApp:process.argv[index+2]||'/Applications/ChatGPT.app'})));return;
  }
  const confirmation=Bun.spawnSync(['/usr/bin/osascript','-e',dialogScript,`Install ChatGPT in Hebrew for this user?\n\nRequires ChatGPT ${payload.targetVersion}. Your original application and conversations stay unchanged. Quit the Hebrew application before updating.`],{stdout:'ignore',stderr:'pipe'});
  if(confirmation.exitCode!==0)return;
- const progress=Bun.spawn(['/usr/bin/osascript','-e','display dialog "Installing the Hebrew application. This may take a few minutes." with title "ChatGPT eBrew" buttons {"Installing…"} giving up after 600'],{stdout:'ignore',stderr:'ignore'});
+ const progress=Bun.spawn(['/usr/bin/osascript','-e','display dialog "Installing the Hebrew application. This may take a few minutes." with title "Codex Hebrew" buttons {"Installing…"} giving up after 600'],{stdout:'ignore',stderr:'ignore'});
  try{
   const result=installMacOSApplication(payload);
   progress.kill();

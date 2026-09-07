@@ -82,8 +82,8 @@ export function installRTL({css, locale='he', translations={}, directionalIcons=
       attr(row,'data-rtl-profile-account','');
       const name=row.querySelector(':scope > .truncate, :scope > .truncate-text');
       if(name?.textContent.trim())profileNames.add(name.textContent.trim());
-      if(row.parentElement&&!row.parentElement.querySelector(':scope > [data-ebrew-credit]')){
-        const credit=document.createElement('div');credit.setAttribute('data-ebrew-credit','');credit.setAttribute('dir','rtl');credit.textContent='פותח על ידי גל חבקין';
+      if(row.parentElement&&!row.parentElement.querySelector(':scope > [data-codex-hebrew-credit]')){
+        const credit=document.createElement('div');credit.setAttribute('data-codex-hebrew-credit','');credit.setAttribute('dir','rtl');credit.textContent='פותח על ידי גל חבקין';
         row.before(credit);credits.push(credit);
       }
     }

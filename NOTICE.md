@@ -1,6 +1,6 @@
 # Notices
 
-ChatGPT eBrew is an unofficial community project and is not affiliated with,
+Codex Hebrew is an unofficial community project and is not affiliated with,
 endorsed by, or sponsored by OpenAI.
 
 The MIT License applies to the original project code unless a file states a

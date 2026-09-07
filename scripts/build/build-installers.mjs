@@ -18,7 +18,7 @@ function runBuildCommand(command){
 export async function buildMacOSInstaller(){
  if(process.platform!=='darwin'||process.arch!=='arm64')throw Error('Build this release on an Apple Silicon Mac with the supported ChatGPT installed');
  const work=fs.mkdtempSync(path.join(os.tmpdir(),'chatgpt-installer-build-'));
- const output=path.join(root,'dist/installers'),app=path.join(output,'Install ChatGPT eBrew.app');
+ const output=path.join(root,'dist/installers'),app=path.join(output,'Install Codex Hebrew.app');
  fs.mkdirSync(output,{recursive:true});
  try{
   const runtime=await buildRuntime({runtimeRoot:path.join(work,'runtime')});
@@ -36,17 +36,17 @@ export async function buildMacOSInstaller(){
   fs.rmSync(app,{recursive:true,force:true});
   fs.mkdirSync(path.join(app,'Contents/MacOS'),{recursive:true});
   fs.mkdirSync(path.join(app,'Contents/Resources'),{recursive:true});
-  const executable=path.join(app,'Contents/MacOS/ChatGPT eBrew Installer');
+  const executable=path.join(app,'Contents/MacOS/Codex Hebrew Installer');
   runBuildCommand([process.execPath,'build',entry,'--compile','--target=bun-darwin-arm64','--no-compile-autoload-dotenv','--no-compile-autoload-bunfig',`--outfile=${executable}`]);
   fs.writeFileSync(path.join(app,'Contents/Resources/AppIcon.icns'),icon);
   fs.copyFileSync(path.join(root,'assets/fonts/OFL.txt'),path.join(app,'Contents/Resources/Heebo-OFL.txt'));
   fs.writeFileSync(path.join(app,'Contents/Resources/ThirdPartyNotices.txt'),notices);
-  fs.writeFileSync(path.join(app,'Contents/Info.plist'),`<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"><plist version="1.0"><dict><key>CFBundleIdentifier</key><string>community.chatgpt-ebrew.installer</string><key>CFBundleExecutable</key><string>ChatGPT eBrew Installer</string><key>CFBundleName</key><string>Install ChatGPT eBrew</string><key>CFBundlePackageType</key><string>APPL</string><key>CFBundleVersion</key><string>1</string><key>CFBundleShortVersionString</key><string>0.1.0</string><key>CFBundleIconFile</key><string>AppIcon.icns</string><key>LSMinimumSystemVersion</key><string>${macOSMinimumVersion}</string><key>NSHighResolutionCapable</key><true/></dict></plist>`);
+  fs.writeFileSync(path.join(app,'Contents/Info.plist'),`<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"><plist version="1.0"><dict><key>CFBundleIdentifier</key><string>community.codex-hebrew.installer</string><key>CFBundleExecutable</key><string>Codex Hebrew Installer</string><key>CFBundleName</key><string>Install Codex Hebrew</string><key>CFBundlePackageType</key><string>APPL</string><key>CFBundleVersion</key><string>1</string><key>CFBundleShortVersionString</key><string>0.1.0</string><key>CFBundleIconFile</key><string>AppIcon.icns</string><key>LSMinimumSystemVersion</key><string>${macOSMinimumVersion}</string><key>NSHighResolutionCapable</key><true/></dict></plist>`);
   runBuildCommand(['/usr/bin/codesign','--force','--sign','-',app]);
   runBuildCommand(['/usr/bin/codesign','--verify','--deep','--strict',app]);
-  const dmg=path.join(output,'ChatGPT-eBrew-macOS-arm64.dmg');
+  const dmg=path.join(output,'Codex-Hebrew-macOS-arm64.dmg');
   fs.rmSync(dmg,{force:true});
-  runBuildCommand(['/usr/bin/hdiutil','create','-volname','ChatGPT eBrew','-srcfolder',app,'-format','UDZO',dmg]);
+  runBuildCommand(['/usr/bin/hdiutil','create','-volname','Codex Hebrew','-srcfolder',app,'-format','UDZO',dmg]);
   const manifest={minimumMacOS:macOSMinimumVersion,platform:'darwin',arch:'arm64',targetVersion,sourceArchiveSha256:runtime.sourceArchiveSha256,installer:path.basename(dmg),sha256:sha256(fs.readFileSync(dmg)),signing:'ad-hoc',notarized:false,windows:'unverified: requires a Windows target and acceptance test'};
   fs.writeFileSync(path.join(output,'release-manifest.json'),JSON.stringify(manifest,null,2)+'\n');
   fs.writeFileSync(path.join(output,'SHA256SUMS'),`${manifest.sha256}  ${manifest.installer}\n`);

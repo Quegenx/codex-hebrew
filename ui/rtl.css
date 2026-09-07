@@ -71,7 +71,7 @@ html[data-chatgpt-rtl] [data-rtl-profile-account-menuitem] {
 html[data-chatgpt-rtl] :is([data-rtl-profile-account], [data-rtl-profile-account-menuitem]) :where([dir="auto"], .truncate, .truncate-text) {
   text-align: right !important;
 }
-html[data-chatgpt-rtl] [data-ebrew-credit] {
+html[data-chatgpt-rtl] [data-codex-hebrew-credit] {
   overflow: hidden;
   padding: 0.25rem 0.75rem;
   color: currentColor;

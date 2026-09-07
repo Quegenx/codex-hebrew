@@ -3,7 +3,7 @@
   "configVersion": 1,
   "workspaces": {
     "": {
-      "name": "chatgpt-ebrew",
+      "name": "codex-hebrew",
       "dependencies": {
         "@formatjs/icu-messageformat-parser": "^2.11.0",
         "acorn": "^8.15.0",

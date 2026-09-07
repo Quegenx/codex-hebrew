@@ -41,10 +41,10 @@ test('the translated log-out action mirrors its directional icon',()=>{
 test('Latin profile names stay grouped with their avatar at RTL start',async()=>{
  const w=environment();document.body.innerHTML='<div><button id="profile" aria-label="פתיחת תפריט הפרופיל"><span id="avatar">GH</span><span id="footer-name" class="min-w-0 flex-1 truncate">Gal Havkin</span></button></div><div role="menu"><button id="account" role="menuitem"><span>GH</span><span id="menu-name" class="truncate">Gal Havkin</span><span>פרו</span></button></div>';
  const adapter=installRTL({css:'',translations:{'codex.profileFooter.openProfileMenu':'פתיחת תפריט הפרופיל'}});
- const credit=document.querySelector('[data-ebrew-credit]');
+ const credit=document.querySelector('[data-codex-hebrew-credit]');
  expect(document.querySelector('#footer-name').dir).toBe('auto');expect(document.querySelector('#menu-name').dir).toBe('auto');expect(document.querySelector('#profile').hasAttribute('data-rtl-profile-account')).toBe(true);expect(document.querySelector('#account').hasAttribute('data-rtl-profile-account-menuitem')).toBe(true);
- expect(credit?.textContent).toBe('פותח על ידי גל חבקין');expect(credit?.nextElementSibling).toBe(document.querySelector('#profile'));expect(document.querySelectorAll('[data-ebrew-credit]')).toHaveLength(1);
- adapter.stop();expect(document.querySelector('[data-ebrew-credit]')).toBeNull();expect(document.querySelector('#profile').hasAttribute('data-rtl-profile-account')).toBe(false);expect(document.querySelector('#account').hasAttribute('data-rtl-profile-account-menuitem')).toBe(false);w.happyDOM.abort();
+ expect(credit?.textContent).toBe('פותח על ידי גל חבקין');expect(credit?.nextElementSibling).toBe(document.querySelector('#profile'));expect(document.querySelectorAll('[data-codex-hebrew-credit]')).toHaveLength(1);
+ adapter.stop();expect(document.querySelector('[data-codex-hebrew-credit]')).toBeNull();expect(document.querySelector('#profile').hasAttribute('data-rtl-profile-account')).toBe(false);expect(document.querySelector('#account').hasAttribute('data-rtl-profile-account-menuitem')).toBe(false);w.happyDOM.abort();
 });
 test('replacement stylesheet keeps source order, handles lazy links, and restores originals',async()=>{
  const w=environment();const link=document.createElement('link');link.disabled=false;link.rel='stylesheet';link.href='app://-/assets/main.css';document.head.append(link);

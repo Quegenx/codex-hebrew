@@ -9,9 +9,9 @@ import {readHebrewCatalog} from '../translation/hebrew-catalog.mjs';
 import {hebrewApplicationName} from '../installation/macos-installer.mjs';
 
 const root=fileURLToPath(new URL('../../',import.meta.url));
-const executable=process.argv[2]||path.join(root,'dist/installers/Install ChatGPT eBrew.app/Contents/MacOS/ChatGPT eBrew Installer');
+const executable=process.argv[2]||path.join(root,'dist/installers/Install Codex Hebrew.app/Contents/MacOS/Codex Hebrew Installer');
 // Keep ChatGPT's IPC socket path below macOS's 104-byte sockaddr_un limit.
-const home=fs.mkdtempSync('/private/tmp/ebrew-test-');
+const home=fs.mkdtempSync('/private/tmp/codex-hebrew-test-');
 const support=path.join(home,'Library/Application Support/ChatGPT Hebrew');
 const hash=file=>crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
 const source='/Applications/ChatGPT.app/Contents/Resources/app.asar',sourceHash=hash(source);

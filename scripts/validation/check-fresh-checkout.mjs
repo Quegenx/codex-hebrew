@@ -6,7 +6,7 @@ import {fileURLToPath} from 'node:url';
 
 const root=fileURLToPath(new URL('../../',import.meta.url));
 const archive=path.resolve(process.argv[2]||'/Applications/ChatGPT.app/Contents/Resources/app.asar');
-const temporary=fs.mkdtempSync(path.join(os.tmpdir(),'ebrew-fresh-checkout-'));
+const temporary=fs.mkdtempSync(path.join(os.tmpdir(),'codex-hebrew-fresh-checkout-'));
 const checkout=path.join(temporary,'source'),runtimeRoot=path.join(temporary,'application','runtime');
 function run(command,cwd=checkout){
  const result=Bun.spawnSync(command,{cwd,stdout:'pipe',stderr:'pipe'});
