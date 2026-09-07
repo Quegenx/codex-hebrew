@@ -20,7 +20,7 @@ export function installMacOSApplication(payload,{sourceApp='/Applications/ChatGP
  const sourceAsar=path.join(sourceApp,'Contents/Resources/app.asar');
  if(!fs.existsSync(sourceAsar))throw Error('Install the supported ChatGPT application in Applications first.');
  const archive=openAsar(sourceAsar);
- if(archive.hash!==payload.sourceArchiveSha256)throw Error(`This ChatGPT version is not supported. This installer requires ${payload.targetVersion}. The original application was not changed.`);
+ if(archive.hash!==payload.sourceArchiveSha256)throw Error('This ChatGPT version is not supported by this installer yet. Download the latest Codex Hebrew installer. The original application was not changed.');
  const {changes}=assembleNativeWrapperChanges(archive,{canonical:payload.catalog,marketplace:payload.marketplace,catalogData:payload.nativeLocale,loaderSource:payload.loader});
  const applicationRoot=path.join(home,'Library/Application Support/ChatGPT Hebrew');
  // The upstream application uses a macOS Unix socket, whose path must fit sockaddr_un.

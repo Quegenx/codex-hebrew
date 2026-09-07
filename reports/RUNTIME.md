@@ -12,4 +12,4 @@ Focused tests drive the main loader through initial attachment, reload, a second
 
 The app forces the main-process locale API to Hebrew and installs the 214-entry native locale catalog plus 226 static and 16 templated native-hook translations. The hook records the translated templates actually passed to `Menu.buildFromTemplate`; the current report observes the Hebrew File and Edit labels. macOS-owned Writing Tools, AutoFill, dictation, emoji, and window-management entries follow the operating system.
 
-Windows discovery, path resolution, and copied-wrapper construction have fixture coverage. No Windows host was available, so Windows launch, renderer attachment, native chrome, restoration, and visual behavior remain unverified. The full visual matrix also remains incomplete on macOS. `bun run verify` exposes those missing categories and exits nonzero.
+The full macOS visual matrix remains incomplete. `bun run verify` exposes those missing categories and exits nonzero.

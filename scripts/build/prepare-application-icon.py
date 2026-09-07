@@ -55,8 +55,3 @@ if __name__ == '__main__':
     canvas = make_canvas(source, CONTENT)
     Path(png_out).parent.mkdir(parents=True, exist_ok=True)
     canvas.save(png_out, 'PNG')
-    if len(sys.argv) > 3:
-        # Windows taskbar/start do not add macOS-style extra mask, so the tile can fill more of the ICO.
-        canvas = make_canvas(source, 960)
-        Path(sys.argv[3]).parent.mkdir(parents=True, exist_ok=True)
-        canvas.save(sys.argv[3], format='ICO', sizes=[(16, 16), (24, 24), (32, 32), (48, 48), (64, 64), (128, 128), (256, 256)])

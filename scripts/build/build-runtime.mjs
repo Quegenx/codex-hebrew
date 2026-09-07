@@ -8,10 +8,9 @@ import {buildRendererInjection} from './renderer-injection.mjs';
 import {readHebrewCatalog} from '../translation/hebrew-catalog.mjs';
 
 const root=fileURLToPath(new URL('../../',import.meta.url));
-export function defaultRuntimeRoot(platform=process.platform,environment=process.env,home=os.homedir()){
- if(platform==='darwin')return path.join(home,'Library','Application Support','ChatGPT Hebrew','runtime');
- if(platform==='win32')return path.win32.join(environment.APPDATA||path.win32.join(home,'AppData','Roaming'),'ChatGPT Hebrew','runtime');
- return path.join(environment.XDG_CONFIG_HOME||path.join(home,'.config'),'chatgpt-hebrew','runtime');
+export function defaultRuntimeRoot(platform=process.platform,_environment=process.env,home=os.homedir()){
+ if(platform!=='darwin')throw Error(`Codex Hebrew supports macOS only, not ${platform}.`);
+ return path.join(home,'Library','Application Support','ChatGPT Hebrew','runtime');
 }
 const digest=value=>crypto.createHash('sha256').update(value).digest('hex');
 

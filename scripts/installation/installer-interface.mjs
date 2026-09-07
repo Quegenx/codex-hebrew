@@ -17,7 +17,7 @@ export function runMacOSInstaller(payload){
   if(!home||!/^\/private\/tmp\/ch-test-[^/]+$/.test(home))throw Error('Installer tests require an isolated temporary home');
   console.log(JSON.stringify(installMacOSApplication(payload,{home,sourceApp:process.argv[index+2]||'/Applications/ChatGPT.app'})));return;
  }
- const confirmation=Bun.spawnSync(['/usr/bin/osascript','-e',dialogScript,`Install ChatGPT in Hebrew for this user?\n\nRequires ChatGPT ${payload.targetVersion}. Your original application and conversations stay unchanged. Quit the Hebrew application before updating.`],{stdout:'ignore',stderr:'pipe'});
+ const confirmation=Bun.spawnSync(['/usr/bin/osascript','-e',dialogScript,'Install ChatGPT in Hebrew for this user?\n\nChatGPT Desktop must be installed. Your original application and conversations stay unchanged. Quit the Hebrew application before updating.'],{stdout:'ignore',stderr:'pipe'});
  if(confirmation.exitCode!==0)return;
  const progress=Bun.spawn(['/usr/bin/osascript','-e','display dialog "Installing the Hebrew application. This may take a few minutes." with title "Codex Hebrew" buttons {"Installing…"} giving up after 600'],{stdout:'ignore',stderr:'ignore'});
  try{

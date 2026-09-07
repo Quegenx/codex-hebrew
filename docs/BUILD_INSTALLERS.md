@@ -2,7 +2,7 @@
 
 End users download the installer from GitHub Releases. These instructions are for maintainers.
 
-The current build produces an Apple Silicon macOS DMG for ChatGPT Desktop `26.901.51231` (build `8109`), with ASAR SHA-256 `64fc2f27d2dddfa968acfacbe5e4e0328071bdc406351ff4a7d18f0b4692c83d`. Windows has no verified target or installer yet. A fixture test of the Windows wrapper is not a Windows acceptance test.
+The current build produces an Apple Silicon macOS DMG for ChatGPT Desktop `26.901.51231` (build `8109`), with ASAR SHA-256 `64fc2f27d2dddfa968acfacbe5e4e0328071bdc406351ff4a7d18f0b4692c83d`.
 
 On an Apple Silicon Mac, install that application at `/Applications/ChatGPT.app`, Bun `1.4.2`, Python 3, and Xcode Command Line Tools. Then run:
 
@@ -36,5 +36,3 @@ The current installer is ad-hoc signed and not notarized. Local signature verifi
 The acceptance command uses a temporary home and the compiled installer with only system tools on PATH. It checks installation, reinstall, profile and settings preservation, runtime integrity, translated metadata, rejection of an unsupported version, and launcher invocation. It does not open the full GUI or test Apple's download approval flow, because a temporary macOS home has no login Keychain and would show a system prompt. To test a mounted image, pass its installer executable to `scripts/validation/check-installer.mjs`.
 
 For a release, upload only the DMG, checksum file, and release manifest after acceptance passes. Do not upload the build cache, original application, profiles, or local reports. A draft in a private repository is not publicly downloadable.
-
-Windows release work requires the actual supported Windows application and a Windows machine. Review its version-specific bundles, build its own runtime and installer, then verify install, launch, reinstall, shortcuts, and profile preservation there before publishing an EXE.

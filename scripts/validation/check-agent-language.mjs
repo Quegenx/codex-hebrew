@@ -6,7 +6,7 @@ import {openAsar} from '../analysis/asar-archive.mjs';
 
 const root=fileURLToPath(new URL('../../',import.meta.url));
 const resources=path.dirname(process.argv[2]||'/Applications/ChatGPT.app/Contents/Resources/app.asar');
-const codex=[path.join(resources,'codex'),path.join(resources,'codex.exe')].find(fs.existsSync),configuration=JSON.parse(fs.readFileSync(`${root}config/agent-language.json`,'utf8'));
+const codex=path.join(resources,'codex'),configuration=JSON.parse(fs.readFileSync(`${root}config/agent-language.json`,'utf8'));
 if(!codex)throw Error(`Bundled Codex executable not found in ${resources}`);
 const directory=`${root}.lab/agent-language-check`;fs.rmSync(directory,{recursive:true,force:true});fs.mkdirSync(directory,{recursive:true,mode:0o700});
 fs.writeFileSync(path.join(directory,'config.toml'),`developer_instructions = ${JSON.stringify(configuration.developerInstructions)}\n`,{mode:0o600});

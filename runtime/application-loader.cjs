@@ -2,9 +2,8 @@ const os = require('node:os');
 const path = require('node:path');
 
 function runtimeRoot() {
-  if (process.platform === 'darwin') return path.join(os.homedir(), 'Library', 'Application Support', 'ChatGPT Hebrew', 'runtime');
-  if (process.platform === 'win32') return path.join(process.env.APPDATA || path.join(os.homedir(), 'AppData', 'Roaming'), 'ChatGPT Hebrew', 'runtime');
-  return path.join(process.env.XDG_CONFIG_HOME || path.join(os.homedir(), '.config'), 'chatgpt-hebrew', 'runtime');
+  if (process.platform !== 'darwin') throw Error(`Codex Hebrew supports macOS only, not ${process.platform}.`);
+  return path.join(os.homedir(), 'Library', 'Application Support', 'ChatGPT Hebrew', 'runtime');
 }
 
 const runtime = require(path.join(runtimeRoot(), 'main.cjs')).install({

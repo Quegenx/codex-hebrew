@@ -47,7 +47,7 @@ export async function buildMacOSInstaller(){
   const dmg=path.join(output,'Codex-Hebrew-macOS-arm64.dmg');
   fs.rmSync(dmg,{force:true});
   runBuildCommand(['/usr/bin/hdiutil','create','-volname','Codex Hebrew','-srcfolder',app,'-format','UDZO',dmg]);
-  const manifest={minimumMacOS:macOSMinimumVersion,platform:'darwin',arch:'arm64',targetVersion,sourceArchiveSha256:runtime.sourceArchiveSha256,installer:path.basename(dmg),sha256:sha256(fs.readFileSync(dmg)),signing:'ad-hoc',notarized:false,windows:'unverified: requires a Windows target and acceptance test'};
+  const manifest={minimumMacOS:macOSMinimumVersion,platform:'darwin',arch:'arm64',targetVersion,sourceArchiveSha256:runtime.sourceArchiveSha256,installer:path.basename(dmg),sha256:sha256(fs.readFileSync(dmg)),signing:'ad-hoc',notarized:false};
   fs.writeFileSync(path.join(output,'release-manifest.json'),JSON.stringify(manifest,null,2)+'\n');
   fs.writeFileSync(path.join(output,'SHA256SUMS'),`${manifest.sha256}  ${manifest.installer}\n`);
   return{...manifest,application:app,executable};
