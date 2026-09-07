@@ -1,24 +1,30 @@
-# Codex Hebrew
+<div dir="rtl">
+
+# <span dir="ltr">Codex Hebrew</span>
 
 התאמה קהילתית ולא רשמית של ChatGPT Desktop לעברית ולממשק מימין לשמאל עבור Mac עם Apple Silicon.
 
-Codex Hebrew מתקין עותק נפרד בשם **צ׳אט ג׳יפיטי בעברית**. היישום המקורי ב־`/Applications/ChatGPT.app` והפרופיל הרגיל שלו אינם משתנים. לעותק העברי יש יישום, פרופיל והגדרות משלו, ולכן אפשר להשתמש בשתי הגרסאות במקביל.
+Codex Hebrew מתקין עותק נפרד בשם **צ׳אט ג׳יפיטי בעברית**. היישום המקורי ב־<code dir="ltr">/Applications/ChatGPT.app</code> והפרופיל הרגיל שלו אינם משתנים. לעותק העברי יש יישום, פרופיל והגדרות משלו, ולכן אפשר להשתמש בשתי הגרסאות במקביל.
 
 ![מסך הכניסה בעברית](reports/visual-macos/installed/login.png)
 
 ## התקנה
 
-1. הורידו את `Codex-Hebrew-macOS-arm64.dmg` מ[עמוד ההורדות](https://github.com/Quegenx/codex-hebrew/releases).
+**[הורדת המתקין למק](https://github.com/Quegenx/codex-hebrew/releases/download/v0.1.1/Codex-Hebrew-macOS-arm64.dmg)**
+
+צריך להוריד רק את קובץ ה־DMG. שאר הקבצים בעמוד ההפצה מיועדים לאימות טכני או לעיון בקוד המקור ואינם נחוצים להתקנה.
+
+1. הורידו את המתקין מהקישור למעלה.
 2. פתחו את קובץ ה־DMG.
-3. הפעילו את **Install Codex Hebrew** ולחצו **Install**.
+3. הפעילו את **<span dir="ltr">Install Codex Hebrew</span>** ולחצו **<span dir="ltr">Install</span>**.
 
 זה הכול. בסיום ההתקנה **צ׳אט ג׳יפיטי בעברית** ייפתח אוטומטית ויישאר בתיקיית היישומים שלכם.
 
-נדרש Mac עם Apple Silicon ו־macOS 13 ומעלה, ועליו ChatGPT Desktop מותקן.
+נדרש Mac עם Apple Silicon ו־macOS 13 ומעלה, ועליו ChatGPT Desktop בגרסה <code dir="ltr">26.901.51231</code> מותקן.
 
-היישום מותקן ב־`~/Applications/צ׳אט ג׳יפיטי בעברית.app`. הפרופיל, הגדרות Codex וקובצי ההרצה נשמרים תחת `~/Library/Application Support/ChatGPT Hebrew/`. בהפעלה הראשונה ייתכן שתידרש התחברות מחדש.
+היישום מותקן ב־<code dir="ltr">~/Applications/צ׳אט ג׳יפיטי בעברית.app</code>. הפרופיל, הגדרות Codex וקובצי ההרצה נשמרים תחת <code dir="ltr">~/Library/Application Support/ChatGPT Hebrew/</code>. בהפעלה הראשונה ייתכן שתידרש התחברות מחדש.
 
-המתקין הניסיוני חתום מקומית ואינו מאושר ב־Apple Notarization. אם macOS חוסם את הפתיחה ואתם סומכים על ההורדה, פתחו **System Settings → Privacy & Security** ובחרו **Open Anyway**. פתיחה לאחר הורדה עדיין לא נבדקה על Mac נקי.
+המתקין הניסיוני חתום מקומית ואינו מאושר ב־Apple Notarization. אם macOS חוסם את הפתיחה ואתם סומכים על ההורדה, פתחו **<span dir="ltr">System Settings → Privacy &amp; Security</span>** ובחרו **<span dir="ltr">Open Anyway</span>**. פתיחה לאחר הורדה עדיין לא נבדקה על Mac נקי.
 
 ## שימוש ועדכונים
 
@@ -30,9 +36,9 @@ Codex Hebrew מתקין עותק נפרד בשם **צ׳אט ג׳יפיטי בע�
 
 ## הסרה
 
-להסרת היישום בלבד, מחקו את `~/Applications/צ׳אט ג׳יפיטי בעברית.app`. הפרופיל וההגדרות יישארו להתקנה עתידית.
+להסרת היישום בלבד, מחקו את <code dir="ltr">~/Applications/צ׳אט ג׳יפיטי בעברית.app</code>. הפרופיל וההגדרות יישארו להתקנה עתידית.
 
-להסרה מלאה, סגרו תחילה את היישום ומחקו גם את `~/Library/Application Support/ChatGPT Hebrew/`. פעולה זו מוחקת את הפרופיל הנפרד ואת הגדרות Codex Hebrew.
+להסרה מלאה, סגרו תחילה את היישום ומחקו גם את <code dir="ltr">~/Library/Application Support/ChatGPT Hebrew/</code>. פעולה זו מוחקת את הפרופיל הנפרד ואת הגדרות Codex Hebrew.
 
 ## פיתוח
 
@@ -41,3 +47,5 @@ Codex Hebrew מתקין עותק נפרד בשם **צ׳אט ג׳יפיטי בע�
 ## רישיון
 
 קוד הפרויקט מופץ ברישיון [MIT](LICENSE). שמות, סימנים מסחריים, נכסי צד שלישי וחומר שמקורו ביישום ChatGPT אינם נכללים ברישיון; ראו [NOTICE.md](NOTICE.md).
+
+</div>
