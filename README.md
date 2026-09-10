@@ -44,6 +44,14 @@ Codex Hebrew מתקין עותק נפרד בשם **צ׳אט ג׳יפיטי בע�
 
 ## פיתוח
 
+### גרסת ניסוי ל־Windows
+
+בענף המקומי הזה נוספה תמיכה ניסיונית ב־Codex ל־Windows x64, עבור חבילת
+`26.903.8094.0` בלבד. הוראות הבנייה, ההפעלה והבדיקות נמצאות
+ב־[docs/WINDOWS.md](docs/WINDOWS.md). הבנייה מפיקה עותק נפרד עם מפעיל
+`Codex Hebrew.exe`. מסך הכניסה בעברית ו־RTL נבדקו; מסכים לאחר התחברות
+עדיין לא אומתו. המתקין המקושר למעלה הוא עדיין המתקין המקורי למק.
+
 הוראות לבניית המתקין ולאימותו נמצאות ב־[docs/BUILD_INSTALLERS.md](docs/BUILD_INSTALLERS.md). מגבלות הארכיטקטורה והראיות שנאספו מתועדות ב־[docs/feasibility.md](docs/feasibility.md) וב־[reports/RUNTIME.md](reports/RUNTIME.md).
 
 ## רישיון

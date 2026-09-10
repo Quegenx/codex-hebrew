@@ -28,6 +28,7 @@
     "build:adaptation": "bun scripts/build/build-adaptation.mjs",
     "build:runtime": "bun scripts/build/build-runtime.mjs",
     "build:macos-wrapper": "bun scripts/build/build-macos-wrapper.mjs",
+    "build:windows-wrapper": "bun scripts/build/build-windows-wrapper.mjs",
     "build:installers": "bun scripts/build/build-installers.mjs",
     "check:installer": "bun scripts/validation/check-installer.mjs",
     "update:check": "bun scripts/validation/update-comparison.mjs",

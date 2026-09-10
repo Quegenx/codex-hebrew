@@ -5,7 +5,7 @@ import {installRTL} from '../../ui/rtl-adapter.js';
 import fs from 'node:fs';
 function environment(){const w=new Window({url:'app://-/index.html'});for(const key of ['document','MutationObserver','location'])globalThis[key]=w[key];globalThis.window=w;return w;}
 test('empty search fields and the composer use scoped RTL alignment',()=>{
- const css=fs.readFileSync(new URL('../../ui/rtl.css',import.meta.url),'utf8');expect(css).toContain(':placeholder-shown');expect(css).toContain('.ProseMirror[contenteditable="true"]');expect(css).toContain('.ProseMirror .placeholder:after');expect(css).toContain(':has(> p[data-placeholder]:only-child > br.ProseMirror-trailingBreak:only-child) > p[data-placeholder]');expect(css).toContain('unicode-bidi: isolate;\n  text-align: right;');
+ const css=fs.readFileSync(new URL('../../ui/rtl.css',import.meta.url),'utf8').replaceAll('\r\n','\n');expect(css).toContain(':placeholder-shown');expect(css).toContain('.ProseMirror[contenteditable="true"]');expect(css).toContain('.ProseMirror .placeholder:after');expect(css).toContain(':has(> p[data-placeholder]:only-child > br.ProseMirror-trailingBreak:only-child) > p[data-placeholder]');expect(css).toContain('unicode-bidi: isolate;\n  text-align: right;');
 });
 test('paired back and forward icons both compose with RTL mirroring',()=>{
  const w=environment();document.body.innerHTML='<button aria-label="חזרה"><svg id="back" style="direction:rtl"><path d="navigation-arrow"/></svg></button><button aria-label="קדימה"><svg id="forward" style="direction:rtl;scale:-1 1"><path d="navigation-arrow"/></svg></button>';

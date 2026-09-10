@@ -8,8 +8,10 @@ import {createRequire} from 'node:module';
 const require=createRequire(import.meta.url),directories=[],originalCodexHome=process.env.CODEX_HOME,originalUserData=process.env.CODEX_ELECTRON_USER_DATA_PATH;
 afterEach(()=>{delete process.__chatgptHebrewRuntime;if(originalCodexHome===undefined)delete process.env.CODEX_HOME;else process.env.CODEX_HOME=originalCodexHome;if(originalUserData===undefined)delete process.env.CODEX_ELECTRON_USER_DATA_PATH;else process.env.CODEX_ELECTRON_USER_DATA_PATH=originalUserData;for(const directory of directories.splice(0))fs.rmSync(directory,{recursive:true,force:true});});
 
-function fixture({argv=['electron','application','--user-data-dir=/fixture-profile'],automaticReload=false}={}){
- const runtimeRoot=fs.mkdtempSync(path.join(os.tmpdir(),'chatgpt-hebrew-runtime-'));directories.push(runtimeRoot);
+function fixture({argv=['electron','application','--user-data-dir=/fixture-profile'],automaticReload=false,windowsIcon=false,appDetailsAvailable=true}={}){
+ const directory=fs.mkdtempSync(path.join(os.tmpdir(),'chatgpt-hebrew-runtime-'));directories.push(directory);
+ const runtimeRoot=path.join(directory,'app/resources/hebrew-runtime');fs.mkdirSync(runtimeRoot,{recursive:true});
+ if(windowsIcon){fs.writeFileSync(path.join(runtimeRoot,'app.ico'),'fixture-icon');fs.writeFileSync(path.join(directory,'Codex Hebrew.exe'),'fixture-launcher');}
  fs.writeFileSync(path.join(runtimeRoot,'manifest.json'),JSON.stringify({sourceArchiveSha256:'archive'}));
  fs.writeFileSync(path.join(runtimeRoot,'renderer.js'),'renderer-source');
  fs.writeFileSync(path.join(runtimeRoot,'native-chrome-he.json'),'{}');
@@ -19,13 +21,31 @@ function fixture({argv=['electron','application','--user-data-dir=/fixture-profi
   constructor(options){this.options=options;this.showCount=0;this.inactiveCount=0;this.webContents=new EventEmitter();this.webContents.id=++nextId;this.webContents.getURL=()=>this.url||'app://-/index.html';this.webContents.executeJavaScript=(source,userGesture)=>{this.executed={source,userGesture};return new Promise(resolve=>{resolveInjection=resolve;});};if(automaticReload){this.webContents.reloadCount=0;this.webContents.reload=()=>{this.webContents.reloadCount++;setTimeout(()=>this.webContents.emit('dom-ready'),0);};}}
   show(){this.showCount++;}
   showInactive(){this.inactiveCount++;}
+  setAppDetails(options){this.appDetails=options;}
  }
- const electron={BrowserWindow,app:{setPath(name,value){if(name==='userData')userData=value;},getPath(name){if(name==='userData')return userData;},relaunch(options){relaunched=options;},exit(code){exitCode=code;}}};
+ if(!appDetailsAvailable)delete BrowserWindow.prototype.setAppDetails;
+ const electron={BrowserWindow,app:{setAppUserModelId(){},setPath(name,value){if(name==='userData')userData=value;},getPath(name){if(name==='userData')return userData;},relaunch(options){relaunched=options;},exit(code){exitCode=code;}}};
  const runtime=require('../../runtime/electron-main.cjs').install({runtimeRoot,sourceArchiveSha256:'archive',electron,argv});
+ electron.app.setAppUserModelId('original.app.id');
  return{runtimeRoot,BrowserWindow:runtime.BrowserWindow,profilePath:runtime.profilePath,runtime,get relaunched(){return relaunched;},get exitCode(){return exitCode;},resolve:value=>resolveInjection(value)};
 }
 
 describe('main-process renderer injection',()=>{
+ test.skipIf(process.platform!=='win32')('starts with the Hebrew icon when Owl has no setAppDetails API',()=>{
+  const state=fixture({windowsIcon:true,appDetailsAvailable:false});
+  const window=new state.BrowserWindow({webPreferences:{preload:'/app/preload.js'}});
+  expect(window.options.icon).toBe(path.join(state.runtimeRoot,'app.ico'));
+  expect(window.webContents.listenerCount('dom-ready')).toBe(1);
+  expect(window.appDetails).toBeUndefined();
+ });
+ test.skipIf(process.platform!=='win32')('uses the Hebrew Windows icon and pins the launcher while preserving the app ID',()=>{
+  const state=fixture({windowsIcon:true}),window=new state.BrowserWindow({icon:'old-icon',webPreferences:{preload:'/app/preload.js'}});
+  const launcher=path.resolve(state.runtimeRoot,'../../..','Codex Hebrew.exe');
+  expect(window.options.icon).toBe(path.join(state.runtimeRoot,'app.ico'));
+  expect(window.appDetails).toEqual({appId:'original.app.id',appIconPath:launcher,appIconIndex:0,relaunchCommand:`"${launcher}"`,relaunchDisplayName:'Codex Hebrew'});
+  const unrelated=new state.BrowserWindow({icon:'other-icon',webPreferences:{preload:'/app/browser-page-preload.js'}});
+  expect(unrelated.options.icon).toBe('other-icon');expect(unrelated.appDetails).toBeUndefined();
+ });
  test('holds the ChatGPT window until Hebrew attaches and records status',async()=>{
   const state=fixture(),window=new state.BrowserWindow({show:true,webPreferences:{preload:'/app/.vite/build/preload.js'}});
   expect(state.profilePath).toBe('/fixture-profile');

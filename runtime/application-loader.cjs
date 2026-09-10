@@ -2,6 +2,7 @@ const os = require('node:os');
 const path = require('node:path');
 
 function runtimeRoot() {
+  if (process.platform === 'win32') return path.join(process.resourcesPath, 'hebrew-runtime');
   if (process.platform !== 'darwin') throw Error(`Codex Hebrew supports macOS only, not ${process.platform}.`);
   return path.join(os.homedir(), 'Library', 'Application Support', 'ChatGPT Hebrew', 'runtime');
 }

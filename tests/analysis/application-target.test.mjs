@@ -24,7 +24,7 @@ except SystemExit as error:
 else:
     raise AssertionError('Empty artwork was accepted')
 `;
- const result=Bun.spawnSync(['python3','-c',check,script],{stdout:'pipe',stderr:'pipe'});
+ const result=Bun.spawnSync([process.env.CODEX_HEBREW_PYTHON||'python3','-c',check,script],{stdout:'pipe',stderr:'pipe'});
  expect(result.stderr.toString()).toBe('');expect(result.exitCode).toBe(0);
 });
 
@@ -32,6 +32,14 @@ test('application target fails closed when Electron resources are absent',()=>{
  expect(()=>resolveApplicationTarget({platform:'darwin',executable:'/Applications/ChatGPT.app/Contents/MacOS/ChatGPT',exists:value=>value.endsWith('/MacOS/ChatGPT')})).toThrow('No app.asar');
 });
 
-test('application target rejects non-macOS platforms',()=>{
- expect(()=>resolveApplicationTarget({platform:'linux'})).toThrow('supports macOS only');
+test('application target rejects unsupported platforms',()=>{
+ expect(()=>resolveApplicationTarget({platform:'linux'})).toThrow('supports macOS and Windows only');
+});
+
+test('Windows target finds resources beside the executable with spaces in its path',()=>{
+ const executable='C:\\Program Files\\Codex\\ChatGPT.exe';
+ const archive='C:\\Program Files\\Codex\\resources\\app.asar';
+ const exists=value=>[executable,archive].includes(value);
+ expect(resolveApplicationTarget({platform:'win32',executable,exists}).archive).toBe(archive);
+ expect(()=>resolveApplicationTarget({platform:'win32',executable,exists:value=>value===executable})).toThrow('No app.asar');
 });

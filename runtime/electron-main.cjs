@@ -29,6 +29,14 @@ function install({runtimeRoot, sourceArchiveSha256, electron = require('electron
   }
   const windowStatuses = new Map();
   const events = [];
+  const iconPath = path.join(runtimeRoot, 'app.ico');
+  const windowsIcon = process.platform === 'win32' && fs.existsSync(iconPath) ? iconPath : null;
+  const launcherPath = path.resolve(runtimeRoot, '../../..', 'Codex Hebrew.exe');
+  let windowAppId = null;
+  if (windowsIcon && typeof electron.app.setAppUserModelId === 'function') {
+    const setAppUserModelId = electron.app.setAppUserModelId.bind(electron.app);
+    electron.app.setAppUserModelId = id => { windowAppId = id; return setAppUserModelId(id); };
+  }
   const writeStatus = () => {
     const status = {schemaVersion: 2, pid: process.pid, sourceArchiveSha256, profilePath: electron.app.getPath('userData'), locale: applicationProxy.getLocale(), updatedAt: new Date().toISOString(), events, windows: [...windowStatuses.values()]};
     const temporary = `${statusPath}.${process.pid}.tmp`;
@@ -41,8 +49,15 @@ function install({runtimeRoot, sourceArchiveSha256, electron = require('electron
     constructor(options = {}) {
       const target = path.basename(options.webPreferences?.preload || '') === 'preload.js';
       const requestedOnConstruction = target && options.show !== false;
-      super(target ? {...options, show: false} : options);
+      super(target ? {...options, show: false, ...(windowsIcon ? {icon: windowsIcon} : {})} : options);
       if (!target) return;
+      if (windowsIcon && windowAppId && fs.existsSync(launcherPath) && typeof this.setAppDetails === 'function') {
+        try {
+          this.setAppDetails({appId: windowAppId, appIconPath: launcherPath, appIconIndex: 0, relaunchCommand: `"${launcherPath}"`, relaunchDisplayName: 'Codex Hebrew'});
+        } catch (error) {
+          console.warn('[chatgpt-hebrew] Window relaunch details unavailable', error);
+        }
+      }
 
       const actualShow = this.show.bind(this);
       const actualShowInactive = this.showInactive.bind(this);

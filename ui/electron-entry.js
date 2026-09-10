@@ -39,15 +39,14 @@ window.installChatGPTHebrew = function(options) {
       if (fiber.child) stack.push(fiber.child);
       if (fiber.sibling) stack.push(fiber.sibling);
     }
-    if (providers.size) {
-      status='attached';
-      if (timer !== null) {clearInterval(timer);timer=null;}
-    }
+    if (providers.size) status='attached';
     styles.apply();
   }
   void installDirection(options.direction).then(next=>{if(disposed){next.stop();return;}direction=next;for(const instance of providers.keys())instance.forceUpdate();apply();}).catch(()=>{direction={status:()=>({state:'unsupported'}),stop(){}};});
   apply();
-  if(status!=='attached')timer=setInterval(()=>{if(!disposed)apply();},250);
+  // Locale resources can arrive after the first successful attachment and
+  // replace IntlProvider's state. Reattach only when its intl identity changes.
+  timer=setInterval(()=>{if(!disposed)apply();},500);
   const api={
     status(){return {version:2,status,providers:providers.size,polling:timer!==null,postRenderTranslations:false,rtl:rtl.status(),direction:direction.status(),styles:styles.status(),catalogSize:Object.keys(options.translations).length};},
     stop(){disposed=true;if(timer!==null)clearInterval(timer);timer=null;styles.stop();direction.stop();rtl.stop();for(const [instance,p] of providers)if(instance.state?.intl===p.replacement)instance.setState({intl:p.original});providers.clear();if(window.chatgptHebrew===api)delete window.chatgptHebrew;},
