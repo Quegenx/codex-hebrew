@@ -47,13 +47,11 @@
 ### תמיכה ב־<span dir="ltr">Windows</span>
 
 הגרסה ל־<span dir="ltr">Windows</span> תומכת בעברית ובממשק מימין לשמאל, כולל חלונית הפלטים והמקורות.
-להתקנה דרך בנייה מקומית, ראו את [המדריך ל־Windows](docs/WINDOWS.md).
-קובץ ה־DMG שמקושר למעלה מיועד למק.
 
-נוסף גם תהליך בנייה של **מתקין EXE ל־Windows**, שמזהה את Codex המותקן,
-יוצר את העותק בעברית ומוסיף קיצורי דרך. משתמשי המתקין אינם צריכים Git או
-Bun. הוראות השימוש והבנייה נמצאות
-ב־[docs/WINDOWS_INSTALLER.md](docs/WINDOWS_INSTALLER.md).
+**מתקין ל־Windows עדיין לא פורסם להורדה ב־GitHub.** קובץ ה־DMG שמקושר למעלה מיועד למק.
+
+קוד המתקין כבר נמצא בפרויקט. לבניית קובץ התקנה, ראו את [מדריך הבנייה של מתקין Windows](docs/WINDOWS_INSTALLER.md).
+לבנייה ולהפעלה ללא מתקין, ראו את [המדריך ל־Windows](docs/WINDOWS.md).
 
 הוראות לבניית המתקין ולאימותו נמצאות ב־[docs/BUILD_INSTALLERS.md](docs/BUILD_INSTALLERS.md). מגבלות הארכיטקטורה והראיות שנאספו מתועדות ב־[docs/feasibility.md](docs/feasibility.md) וב־[reports/RUNTIME.md](reports/RUNTIME.md).
 

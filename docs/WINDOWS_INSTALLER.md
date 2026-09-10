@@ -1,5 +1,7 @@
 # Windows EXE installer
 
+The installer source is merged, but no Windows EXE is published on GitHub Releases yet. The commands below are for building it on Windows.
+
 `Codex-Hebrew-Setup-26.903.8094.0.exe` is a single-file, per-user installer for
 the matching Windows x64 Codex installation. End users need no Git clone, Bun,
 compiler or command-line steps. The installer currently has no digital signature.
