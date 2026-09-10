@@ -24,8 +24,10 @@ translation API. No Bun installation is needed to run the finished application.
 Start `Codex Hebrew.exe` in the output directory. Keep its `app` subdirectory
 beside it. The launcher supplies a separate profile and Codex configuration under
 `%LOCALAPPDATA%\Codex Hebrew\`. It preserves existing files in that directory.
-Sign in manually on first use. Build a new output for each supported upgrade;
-this build does not provide an installer, updater or uninstaller.
+Sign in manually on first use. Build a new output for each supported upgrade.
+For installation without Git or Bun, build the single-file Windows Setup EXE;
+see [WINDOWS_INSTALLER.md](WINDOWS_INSTALLER.md). It supports installation,
+manual updates and removal of the managed application.
 
 ## Use an existing local Codex data store
 
@@ -92,12 +94,13 @@ It only updates existing shortcuts with the Codex application ID and a target
 in this application or the known old Codex RTL path. It preserves the ID, saves
 the old shortcuts under `shortcut-backups`, and leaves unrelated shortcuts
 unchanged. Repeating it makes no further changes. This is a repair utility;
-fresh shortcut creation and taskbar pinning belong to the future installer.
+the EXE installer creates new desktop and Start menu shortcuts. Taskbar pinning
+is left to the user.
 
 Local verification extracted the launcher's embedded icon and the running
 window's native icon, then compared them with the ICO artwork. Hebrew and RTL
 reattached after startup reload in a separate signed-out profile. The current
-suite passed 66 tests, with one macOS integration test skipped.
+suite passed 68 tests, with one macOS integration test skipped.
 
 ## Conversation width and summary controls
 
@@ -132,7 +135,7 @@ is translated or reordered.
 
 ## Verification performed
 
-On Windows, `bun test` passed 66 tests and skipped the integration test requiring
+On Windows, `bun test` passed 68 tests and skipped the integration test requiring
 the macOS installation. `bun run check:structure` passed. The icon test used the
 bundled Python with Pillow via `CODEX_HEBREW_PYTHON`.
 

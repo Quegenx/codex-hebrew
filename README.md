@@ -50,6 +50,11 @@
 להתקנה דרך בנייה מקומית, ראו את [המדריך ל־Windows](docs/WINDOWS.md).
 קובץ ה־DMG שמקושר למעלה מיועד למק.
 
+נוסף גם תהליך בנייה של **מתקין EXE ל־Windows**, שמזהה את Codex המותקן,
+יוצר את העותק בעברית ומוסיף קיצורי דרך. משתמשי המתקין אינם צריכים Git או
+Bun. הוראות השימוש והבנייה נמצאות
+ב־[docs/WINDOWS_INSTALLER.md](docs/WINDOWS_INSTALLER.md).
+
 הוראות לבניית המתקין ולאימותו נמצאות ב־[docs/BUILD_INSTALLERS.md](docs/BUILD_INSTALLERS.md). מגבלות הארכיטקטורה והראיות שנאספו מתועדות ב־[docs/feasibility.md](docs/feasibility.md) וב־[reports/RUNTIME.md](reports/RUNTIME.md).
 
 ## רישיון

@@ -9,7 +9,7 @@ const projectRoot=fileURLToPath(new URL('../../',import.meta.url));
 // Translation catalogs, generated artifacts, dependencies, and installed skills
 // are data or external tooling, not maintained application source.
 const excludedDirectories=new Set(['.git','.agents','node_modules','.lab','dist','catalogs','reports']);
-const sourceExtensions=new Set(['.js','.mjs','.cjs','.jsx','.ts','.tsx','.css','.scss','.html','.py','.c','.h','.cpp','.swift']);
+const sourceExtensions=new Set(['.js','.mjs','.cjs','.jsx','.ts','.tsx','.css','.scss','.html','.py','.c','.h','.cpp','.swift','.cs','.ps1']);
 const failures=[];
 let sourceFiles=0,largestFile={file:null,lines:0};
 
