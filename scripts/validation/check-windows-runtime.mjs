@@ -15,7 +15,13 @@ socket.addEventListener('message',event=>{const result=JSON.parse(String(event.d
 function command(method,params={}){return new Promise((resolve,reject)=>{const id=++serial,timer=setTimeout(()=>{pending.delete(id);reject(Error(`Timed out: ${method}`));},30000);pending.set(id,{resolve,reject,timer});socket.send(JSON.stringify({id,method,params}));});}
 async function evaluate(expression){const result=await command('Runtime.evaluate',{expression,awaitPromise:true,returnByValue:true});if(result.exceptionDetails)throw Error(JSON.stringify(result.exceptionDetails));return result.result.value;}
 try{
- const state=await evaluate(`({lang:document.documentElement.lang,dir:document.documentElement.dir,status:window.chatgptHebrew?.status(),text:document.body.innerText})`);
+ // A fresh profile can expose DevTools before the first translated provider mounts.
+ let state;
+ for(let attempt=0;attempt<300;attempt++){
+  await new Promise(resolve=>setTimeout(resolve,100));
+  try{state=await evaluate(`({lang:document.documentElement?.lang,dir:document.documentElement?.dir,status:window.chatgptHebrew?.status(),text:document.body?.innerText})`);}catch{continue;}
+  if(state.status?.status==='attached'&&/[\u0590-\u05ff]/u.test(state.text))break;
+ }
  const initialCapture=await command('Page.captureScreenshot',{format:'png'});fs.writeFileSync(screenshotFile,Buffer.from(initialCapture.data,'base64'));
  console.log(JSON.stringify(state,null,2));
  assert.equal(state.lang,'he');assert.equal(state.dir,'rtl');assert.equal(state.status?.status,'attached');assert.equal(state.status.direction.state,'attached');assert.ok(state.status.catalogSize>30000);assert.ok(/[\u0590-\u05ff]/u.test(state.text));

@@ -12,6 +12,8 @@ The application is built from the user's matching local Codex installation.
 - Existing-shortcut repair that preserves the Codex AppUserModelID.
 - Runtime tests, launcher self-check and documented compatibility limits.
 - Summary close/reopen controls and matching RTL thread/composer displacement.
+- Single-file EXE installer with Hebrew UI, source-bound patch payload, update
+  rollback, existing data-mode preservation and a separate uninstaller.
 
 See `WINDOWS.md` for the build and verification commands. During development,
 only changed runtime files or the launcher may be deployed to the local app.
@@ -29,7 +31,7 @@ and removal of the unrelated Codex RTL installation were local maintenance.
 
 ## Evidence and remaining release work
 
-The Bun suite passes 66 tests, with one macOS integration test skipped. Structure
+The Bun suite passes 67 tests, with one macOS integration test skipped. Structure
 validation passes. The previous isolated signed-out runtime proof checked Hebrew,
 RTL and reload. Embedded and native-window icons matched the ICO pixels. Shared
 profile startup was confirmed by the user. The taskbar shortcut paths and icon
@@ -51,9 +53,17 @@ fixtures inside that new directory and does not start an application. Run
 `bun run check:structure` and `bun test` from the source root; set
 `CODEX_HEBREW_PYTHON` to Python with Pillow when it is not the default Python.
 
+The EXE passed fresh installation and update in a task-local fixture, payload
+checksums, preservation of shared-data settings, rejection of an unsupported
+source and signed-out Hebrew/RTL startup and reload. Native unit checks cover
+rollback, removal of a managed fixture, profile preservation and deep paths
+with Windows long-path policy disabled. See `reports/WINDOWS_INSTALLER.md`.
+
 Before a public Windows release, complete a fresh-machine build/install check,
-an installer/update/uninstall flow, signed-in workflow testing, and verification
-of taskbar appearance and relaunch. The target is pinned to Windows package
+interactive installation/removal with real Windows shell registration,
+signed-in workflow testing, and verification of taskbar appearance and relaunch.
+The EXE is an unsigned preview. The target is pinned to Windows package
 26.903.8094.0; later upstream versions require a new compatibility check.
-Follow `NOTICE.md` when deciding what to distribute. No release or source changes
-have been uploaded to GitHub at this checkpoint.
+Follow `NOTICE.md` when deciding what to distribute. Source is maintained on
+`YossiBenagou:windows-hebrew-preview` with upstream PR #1; the installer binary
+is a local deliverable and has not been uploaded as a GitHub release.

@@ -53,6 +53,11 @@ Codex Hebrew מתקין עותק נפרד בשם **צ׳אט ג׳יפיטי בע�
 חלונית הפלטים לאחר התחברות. יתר תהליכי העבודה עדיין דורשים בדיקה.
 המתקין המקושר למעלה הוא עדיין המתקין המקורי למק.
 
+נוסף גם תהליך בנייה של **מתקין EXE ל־Windows**, שמזהה את Codex המותקן,
+יוצר את העותק בעברית ומוסיף קיצורי דרך. משתמשי המתקין אינם צריכים Git או
+Bun. הוראות השימוש והבנייה נמצאות
+ב־[docs/WINDOWS_INSTALLER.md](docs/WINDOWS_INSTALLER.md).
+
 הוראות לבניית המתקין ולאימותו נמצאות ב־[docs/BUILD_INSTALLERS.md](docs/BUILD_INSTALLERS.md). מגבלות הארכיטקטורה והראיות שנאספו מתועדות ב־[docs/feasibility.md](docs/feasibility.md) וב־[reports/RUNTIME.md](reports/RUNTIME.md).
 
 ## רישיון

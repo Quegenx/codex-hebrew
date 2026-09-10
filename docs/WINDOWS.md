@@ -24,8 +24,10 @@ translation API. No Bun installation is needed to run the finished application.
 Start `Codex Hebrew.exe` in the output directory. Keep its `app` subdirectory
 beside it. The launcher supplies a separate profile and Codex configuration under
 `%LOCALAPPDATA%\Codex Hebrew\`. It preserves existing files in that directory.
-Sign in manually on first use. Build a new output for each supported upgrade;
-this preview does not provide an installer, updater or uninstaller.
+Sign in manually on first use. Build a new output for each supported upgrade.
+For installation without Git or Bun, build the single-file Windows Setup EXE;
+see [WINDOWS_INSTALLER.md](WINDOWS_INSTALLER.md). It supports installation,
+manual updates and removal of the managed application.
 
 ## Use an existing local Codex data store
 
