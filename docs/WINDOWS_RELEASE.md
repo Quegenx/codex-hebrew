@@ -55,5 +55,5 @@ Before a public Windows release, complete a fresh-machine build/install check,
 an installer/update/uninstall flow, signed-in workflow testing, and verification
 of taskbar appearance and relaunch. The target is pinned to Windows package
 26.903.8094.0; later upstream versions require a new compatibility check.
-Follow `NOTICE.md` when deciding what to distribute. No release or source changes
-have been uploaded to GitHub at this checkpoint.
+Follow `NOTICE.md` when deciding what to distribute. This checkpoint preceded PR #1. The source is now proposed there; no public
+Windows installer has been released.

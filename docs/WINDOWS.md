@@ -123,9 +123,12 @@ The renderer receives 30,832 translations; 187 native menu IDs are translated.
 macOS-specific hardcoded labels, marketplace source rewrites and bundled skill
 metadata are not ported. The original translation wording remains unchanged.
 
-The shared runtime now checks for later IntlProvider replacement: asynchronous
-locale-resource loading otherwise discards the initial Hebrew catalog. No user
-message text is translated or reordered.
+The Windows renderer checks for later IntlProvider replacement: asynchronous
+locale-resource loading otherwise discards the initial Hebrew catalog. The build
+records its platform in the renderer options. Provider polling and summary
+controls/styles are enabled only for Windows; macOS stops provider discovery
+after attachment and keeps its existing summary layout. No user message text
+is translated or reordered.
 
 ## Verification performed
 
