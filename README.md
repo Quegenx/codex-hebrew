@@ -2,61 +2,33 @@
 
 # <span dir="ltr">Codex Hebrew</span>
 
-התאמה קהילתית ולא רשמית של ChatGPT Desktop לעברית ולממשק מימין לשמאל, למק עם <span dir="ltr">Apple Silicon</span> ול־<span dir="ltr">Windows x64</span>.
+התאמה קהילתית ולא רשמית של ChatGPT Desktop לעברית ולממשק מימין לשמאל.
 
-במק, המתקין יוצר עותק נפרד בשם **צ׳אט ג׳יפיטי בעברית**. היישום המקורי ב־<code dir="ltr">/Applications/ChatGPT.app</code> והפרופיל הרגיל שלו אינם משתנים. לעותק העברי יש יישום, פרופיל והגדרות משלו, ולכן אפשר להשתמש בשתי הגרסאות במקביל.
+**[הורדת המתקין למק — Apple Silicon](https://github.com/Quegenx/codex-hebrew/releases/download/v0.1.1/Codex-Hebrew-macOS-arm64.dmg)**
 
-![מסך הכניסה בעברית](reports/visual-macos/installed/login.png)
-
-## התקנה
-
-**[הורדת המתקין למק](https://github.com/Quegenx/codex-hebrew/releases/download/v0.1.1/Codex-Hebrew-macOS-arm64.dmg)**
-
-צריך להוריד רק את קובץ ה־DMG. שאר הקבצים בעמוד ההפצה מיועדים לאימות טכני או לעיון בקוד המקור ואינם נחוצים להתקנה.
-
-1. הורידו את המתקין מהקישור למעלה.
-2. פתחו את קובץ ה־DMG.
-3. הפעילו את **<span dir="ltr">Install Codex Hebrew</span>** ולחצו **<span dir="ltr">Install</span>**.
-
-זה הכול. בסיום ההתקנה **צ׳אט ג׳יפיטי בעברית** ייפתח אוטומטית ויישאר בתיקיית היישומים שלכם.
+1. הורידו ופתחו את קובץ ה־DMG.
+2. הפעילו את **<span dir="ltr">Install Codex Hebrew</span>** ולחצו **<span dir="ltr">Install</span>**.
+3. בסיום ייפתח **צ׳אט ג׳יפיטי בעברית**. אפשר לפתוח אותו שוב מתיקיית היישומים.
 
 נדרש Mac עם Apple Silicon ו־macOS 13 ומעלה, ועליו ChatGPT Desktop בגרסה <code dir="ltr">26.901.51231</code> מותקן.
 
-היישום מותקן בתיקיית היישומים שבתוך תיקיית המשתמש שלכם. בהפעלה הראשונה ייתכן שתידרש התחברות מחדש.
+המתקין יוצר עותק עברי נפרד עם פרופיל משלו. היישום המקורי והנתונים שלו נשארים כפי שהם; בהפעלה הראשונה ייתכן שתידרש התחברות מחדש.
 
-המתקין הניסיוני חתום מקומית ואינו מאושר ב־Apple Notarization. אם macOS חוסם את הפתיחה ואתם סומכים על ההורדה, פתחו **<span dir="ltr">System Settings → Privacy &amp; Security</span>** ובחרו **<span dir="ltr">Open Anyway</span>**. פתיחה לאחר הורדה עדיין לא נבדקה על Mac נקי.
+המתקין חתום מקומית ואינו מאושר ב־Apple Notarization. אם macOS חוסם את הפתיחה ואתם סומכים על ההורדה, פתחו **<span dir="ltr">System Settings → Privacy &amp; Security</span>** ובחרו **<span dir="ltr">Open Anyway</span>**.
 
-## שימוש ועדכונים
+![מסך הכניסה בעברית](reports/visual-macos/installed/login.png)
 
-היישום העברי והיישום המקורי פועלים בנפרד. כדי לחזור לממשק הרגיל, פתחו את ChatGPT המקורי.
+לעדכון, סגרו את היישום העברי והריצו את המתקין החדש. הפרופיל וההגדרות נשמרים.
 
-היישום המקורי ממשיך להתעדכן כרגיל. העותק העברי מתעדכן באמצעות המתקין שלנו: כשמתפרסמת גרסה חדשה, סגרו את היישום העברי והריצו את המתקין החדש. הפרופיל וההגדרות נשמרים. אם גרסת ChatGPT המותקנת אינה תואמת, המתקין יעצור בלי לשנות את היישום הקיים.
+להסרת היישום, מחקו את <code dir="ltr">~/Applications/צ׳אט ג׳יפיטי בעברית.app</code>. הפרופיל וההגדרות נשמרים.
 
-חלק מהתפריטים שייכים ל־macOS ועשויים להישאר בשפת המערכת. הבדיקה החזותית הנוכחית מכסה את מסך הכניסה; כל המסכים והמצבים עדיין אינם מאומתים.
+<details>
+<summary>למפתחים</summary>
 
-## הסרה
+[בניית מתקין למק](docs/BUILD_INSTALLERS.md) · [בניית מתקין ל־Windows](docs/WINDOWS_INSTALLER.md) · [הרצה ב־Windows](docs/WINDOWS.md) · [ארכיטקטורה ומגבלות](docs/feasibility.md)
 
-הסימן <code dir="ltr">~</code> בתחילת הנתיבים מציין את תיקיית המשתמש שלכם.
+</details>
 
-להסרת היישום בלבד, מחקו את <code dir="ltr">~/Applications/צ׳אט ג׳יפיטי בעברית.app</code>. הפרופיל וההגדרות יישארו להתקנה עתידית.
-
-להסרה מלאה, סגרו תחילה את היישום ומחקו גם את <code dir="ltr">~/Library/Application Support/ChatGPT Hebrew/</code>. פעולה זו מוחקת את הפרופיל וההגדרות של היישום העברי.
-
-## פיתוח
-
-### תמיכה ב־<span dir="ltr">Windows</span>
-
-הגרסה ל־<span dir="ltr">Windows</span> תומכת בעברית ובממשק מימין לשמאל, כולל חלונית הפלטים והמקורות.
-
-**מתקין ל־Windows עדיין לא פורסם להורדה ב־GitHub.** קובץ ה־DMG שמקושר למעלה מיועד למק.
-
-קוד המתקין כבר נמצא בפרויקט. לבניית קובץ התקנה, ראו את [מדריך הבנייה של מתקין Windows](docs/WINDOWS_INSTALLER.md).
-לבנייה ולהפעלה ללא מתקין, ראו את [המדריך ל־Windows](docs/WINDOWS.md).
-
-הוראות לבניית המתקין ולאימותו נמצאות ב־[docs/BUILD_INSTALLERS.md](docs/BUILD_INSTALLERS.md). מגבלות הארכיטקטורה והראיות שנאספו מתועדות ב־[docs/feasibility.md](docs/feasibility.md) וב־[reports/RUNTIME.md](reports/RUNTIME.md).
-
-## רישיון
-
-קוד הפרויקט מופץ ברישיון [MIT](LICENSE). שמות, סימנים מסחריים, נכסי צד שלישי וחומר שמקורו ביישום ChatGPT אינם נכללים ברישיון; ראו [NOTICE.md](NOTICE.md).
+קוד הפרויקט מופץ ברישיון [MIT](LICENSE). נכסי צד שלישי וחומר שמקורו ביישום ChatGPT כפופים ל־[NOTICE.md](NOTICE.md).
 
 </div>
