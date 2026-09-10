@@ -54,4 +54,7 @@ if __name__ == '__main__':
     source, png_out = sys.argv[1], sys.argv[2]
     canvas = make_canvas(source, CONTENT)
     Path(png_out).parent.mkdir(parents=True, exist_ok=True)
-    canvas.save(png_out, 'PNG')
+    if Path(png_out).suffix.lower() == '.ico':
+        canvas.save(png_out, 'ICO', sizes=[(size, size) for size in (16, 20, 24, 32, 40, 48, 64, 128, 256)])
+    else:
+        canvas.save(png_out, 'PNG')

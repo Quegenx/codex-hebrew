@@ -9,6 +9,7 @@ import {readHebrewCatalog} from '../translation/hebrew-catalog.mjs';
 
 const root=fileURLToPath(new URL('../../',import.meta.url));
 export function defaultRuntimeRoot(platform=process.platform,_environment=process.env,home=os.homedir()){
+ if(platform==='win32')return path.join(_environment.LOCALAPPDATA||path.join(home,'AppData','Local'),'Codex Hebrew','runtime');
  if(platform!=='darwin')throw Error(`Codex Hebrew supports macOS only, not ${platform}.`);
  return path.join(home,'Library','Application Support','ChatGPT Hebrew','runtime');
 }

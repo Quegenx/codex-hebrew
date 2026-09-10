@@ -1,0 +1,11 @@
+{
+  "version": "26.903.61454",
+  "packageVersion": "26.903.8094.0",
+  "arch": "x64",
+  "archiveSha256": "3b8e61c9b7afefeda3166f251270724a138af15eb947b7c3907691a695bce66c",
+  "reactExport": "Emn",
+  "directionExport": "rpn",
+  "directionSignature": "function Nle(e){let t=Ple.useContext(Fle);return e||t||`ltr`}",
+  "directionExportSignature": "Nle as rpn",
+  "reactExportSignature": "c as Emn"
+}

@@ -12,6 +12,12 @@ This repository contains Codex Hebrew, a Hebrew and RTL adaptation of ChatGPT De
 
 ## Workflow
 
+For the Windows port, keep product fixes in maintained source and include them
+in `build:windows-wrapper`; deployment-only edits are not a completed fix.
+After checked changes, preserve a local Git checkpoint and refresh the source
+archive. Record machine-specific repairs and release limits in
+`docs/WINDOWS_RELEASE.md`; never package private profiles or conversation data.
+
 1. Identify the installed ChatGPT Desktop version, platform, and Electron ASAR assets relevant to the task.
 2. Perform static analysis by unpacking, extracting metadata, locating symbols, and decompiling with the appropriate existing playbook.
 3. Perform dynamic analysis with controlled instrumentation such as Frida or Objection when static evidence is insufficient.

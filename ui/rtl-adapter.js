@@ -1,5 +1,7 @@
+import {createSummaryPanelAdapter} from './summary-panel.js';
+
 // Reversible renderer adapter. Only explicit message IDs are translated.
-export function installRTL({css, locale='he', translations={}, directionalIcons=[]} = {}) {
+export function installRTL({css, platform, locale='he', translations={}, directionalIcons=[]} = {}) {
   window.chatgptRTL?.stop();
   const html = document.documentElement;
   const originals = [];
@@ -14,6 +16,8 @@ export function installRTL({css, locale='he', translations={}, directionalIcons=
     if (el.getAttribute(name) !== value) el.setAttribute(name,value);
   }
   attr(html,'dir','rtl');attr(html,'lang',locale);attr(html,'data-chatgpt-rtl','');
+  const summaryPanel=platform==='win32'?createSummaryPanelAdapter({translations,attr}):null;
+  if(summaryPanel)attr(html,'data-rtl-windows-summary','');
   const style = document.createElement('style');style.textContent=css;style.dataset.chatgptRTLStyle='';html.append(style);
   const texts = new Map();
   const iconSignatures=new Set(directionalIcons.map(x=>x.signature));
@@ -44,6 +48,7 @@ export function installRTL({css, locale='he', translations={}, directionalIcons=
   }
   function apply(scope=document) {
     const query=selector=>scope===document?[...document.querySelectorAll(selector)]:[...(scope.matches?.(selector)?[scope]:[]),...scope.querySelectorAll(selector)];
+    summaryPanel?.apply(query);
     if(scope===document){attr(html,'dir','rtl');attr(html,'lang',locale);attr(html,'data-chatgpt-rtl','');}
     for(const menu of query('[role="menu"],[role="menubar"]')) attr(menu,'dir','rtl');
     for(const technical of query('[data-codex-terminal],[data-codex-xterm],dil-renderer,.xterm,.monaco-editor,.cm-editor')) attr(technical,'dir','ltr');
@@ -116,12 +121,12 @@ export function installRTL({css, locale='he', translations={}, directionalIcons=
     if(pending||stopped)return;
     pending=true;queueMicrotask(()=>{pending=false;if(stopped)return;const roots=[...pendingRoots];pendingRoots.clear();for(const root of roots)if(root.isConnected&&!roots.some(other=>other!==root&&other.contains(root)))apply(root);});
   });
-  apply();observer.observe(document.body || html,{subtree:true,childList:true,characterData:true});
+  apply();observer.observe(document.body || html,{subtree:true,childList:true,characterData:true,...(summaryPanel?{attributes:true,attributeFilter:['aria-label','aria-pressed','aria-expanded']}:{})});
   const rootObserver=new MutationObserver(()=>{if(!stopped)apply();});
   rootObserver.observe(html,{attributes:true,attributeFilter:['dir','lang','data-chatgpt-rtl']});
   const api={
     stop() {
-      stopped=true;observer.disconnect();rootObserver.disconnect();style.remove();
+      stopped=true;observer.disconnect();rootObserver.disconnect();summaryPanel?.stop();style.remove();
       for(const credit of credits)credit.remove();
       for(const {input,label,onChange} of fileInputs){input.removeEventListener('change',onChange);label.remove();}
       for (const [el,state] of texts) if (el.textContent === state.applied) el.textContent=state.original;

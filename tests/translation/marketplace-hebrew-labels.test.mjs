@@ -18,7 +18,7 @@ describe('plugin marketplace metadata',()=>{
   expect(Object.fromEntries(names.map(entry=>[entry.source,entry.translation]))).toMatchObject({'Pocket AI':'פוקט איי־איי',Box:'בוקס',Lucid:'לוסיד',Krisp:'קריספ',Tally:'טאלי','Read AI':'ריד איי־איי','CVpop - Resume & CV Builder':'סי־וי־פופ – בונה קורות חיים'});
  });
 
- test('writes marketplace names, descriptions and detail metadata into renderer bundles before startup',()=>{
+ test.skipIf(process.platform!=='darwin')('writes marketplace names, descriptions and detail metadata into renderer bundles before startup',()=>{
   const replacementTokens='טקסט עם $& $1 $$';
   const archive=openAsar('/Applications/ChatGPT.app/Contents/Resources/app.asar'),changes=findAndPatchMarketplaceHebrewLabels(archive,{...catalog,entries:[...catalog.entries,{source:'Replacement tokens',translation:replacementTokens}]}),files=Object.keys(changes);
   expect(files.some(file=>file.includes('/app-primary-'))).toBe(true);
