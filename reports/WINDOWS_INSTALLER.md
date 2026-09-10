@@ -54,7 +54,7 @@ fixture were checked with machine `LongPathsEnabled=0`. Setup uses per-process
 
 ## Limits
 
-This is a local unsigned preview, pinned to one Windows x64 source hash. Setup
+This local installer is unsigned and pinned to one Windows x64 source hash. Setup
 requires the supported original Codex installation. A new upstream version needs
 a newly verified build. The binary is not included in Git or a public release.
 

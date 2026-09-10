@@ -20,7 +20,7 @@ internal static class WindowsInstallIntegration {
  internal static void Register(string root,string version){
   foreach(string shortcut in ShortcutPaths)WriteShortcut(shortcut,root);
   using(var key=Registry.CurrentUser.CreateSubKey(RegistryPath)){
-   key.SetValue("DisplayName","Codex Hebrew");key.SetValue("DisplayVersion",version+" Hebrew preview");key.SetValue("Publisher","Codex Hebrew community project");
+   key.SetValue("DisplayName","Codex Hebrew");key.SetValue("DisplayVersion",version+" Hebrew");key.SetValue("Publisher","Codex Hebrew community project");
    key.SetValue("InstallLocation",root);key.SetValue("DisplayIcon",Path.Combine(root,"Codex Hebrew.exe")+",0");key.SetValue("UninstallString",WindowsInstallPaths.Quote(Path.Combine(root,"Uninstall.exe")));
    key.SetValue("NoModify",1,RegistryValueKind.DWord);key.SetValue("NoRepair",1,RegistryValueKind.DWord);
   }

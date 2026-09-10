@@ -62,9 +62,9 @@ with Windows long-path policy disabled. See `reports/WINDOWS_INSTALLER.md`.
 Before a public Windows release, complete a fresh-machine build/install check,
 interactive installation/removal with real Windows shell registration,
 signed-in workflow testing, and verification of taskbar appearance and relaunch.
-The EXE is an unsigned preview. The target is pinned to Windows package
+The EXE is unsigned. The target is pinned to Windows package
 26.903.8094.0; later upstream versions require a new compatibility check.
 Follow `NOTICE.md` when deciding what to distribute. PR #1 has been merged.
-The installer source is maintained on `YossiBenagou:windows-exe-installer`,
-including the upstream platform compatibility fixes. The installer binary is
+PR #2 adds the installer source, including the upstream platform compatibility
+fixes. The installer binary is
 a local deliverable and has not been uploaded as a GitHub release.
