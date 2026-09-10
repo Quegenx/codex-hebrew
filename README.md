@@ -2,9 +2,9 @@
 
 # <span dir="ltr">Codex Hebrew</span>
 
-התאמה קהילתית ולא רשמית של ChatGPT Desktop לעברית ולממשק מימין לשמאל עבור Mac עם Apple Silicon.
+התאמה קהילתית ולא רשמית של ChatGPT Desktop לעברית ולממשק מימין לשמאל, למק עם <span dir="ltr">Apple Silicon</span> ול־<span dir="ltr">Windows x64</span>.
 
-Codex Hebrew מתקין עותק נפרד בשם **צ׳אט ג׳יפיטי בעברית**. היישום המקורי ב־<code dir="ltr">/Applications/ChatGPT.app</code> והפרופיל הרגיל שלו אינם משתנים. לעותק העברי יש יישום, פרופיל והגדרות משלו, ולכן אפשר להשתמש בשתי הגרסאות במקביל.
+במק, המתקין יוצר עותק נפרד בשם **צ׳אט ג׳יפיטי בעברית**. היישום המקורי ב־<code dir="ltr">/Applications/ChatGPT.app</code> והפרופיל הרגיל שלו אינם משתנים. לעותק העברי יש יישום, פרופיל והגדרות משלו, ולכן אפשר להשתמש בשתי הגרסאות במקביל.
 
 ![מסך הכניסה בעברית](reports/visual-macos/installed/login.png)
 
@@ -44,14 +44,11 @@ Codex Hebrew מתקין עותק נפרד בשם **צ׳אט ג׳יפיטי בע�
 
 ## פיתוח
 
-### גרסת ניסוי ל־Windows
+### תמיכה ב־<span dir="ltr">Windows</span>
 
-קיימת תמיכה ניסיונית ב־Codex ל־Windows x64, עבור חבילת
-`26.903.8094.0` בלבד. הוראות הבנייה, ההפעלה והבדיקות נמצאות
-ב־[docs/WINDOWS.md](docs/WINDOWS.md). הבנייה מפיקה עותק נפרד עם מפעיל
-`Codex Hebrew.exe`. נבדקו מסך הכניסה בעברית ו־RTL, וכן פריסת השיחה וסגירת
-חלונית הפלטים לאחר התחברות. יתר תהליכי העבודה עדיין דורשים בדיקה.
-המתקין המקושר למעלה הוא עדיין המתקין המקורי למק.
+הגרסה ל־<span dir="ltr">Windows</span> תומכת בעברית ובממשק מימין לשמאל, כולל חלונית הפלטים והמקורות.
+להתקנה דרך בנייה מקומית, ראו את [המדריך ל־Windows](docs/WINDOWS.md).
+קובץ ה־DMG שמקושר למעלה מיועד למק.
 
 הוראות לבניית המתקין ולאימותו נמצאות ב־[docs/BUILD_INSTALLERS.md](docs/BUILD_INSTALLERS.md). מגבלות הארכיטקטורה והראיות שנאספו מתועדות ב־[docs/feasibility.md](docs/feasibility.md) וב־[reports/RUNTIME.md](reports/RUNTIME.md).
 
