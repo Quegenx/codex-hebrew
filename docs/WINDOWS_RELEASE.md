@@ -1,7 +1,9 @@
 # Windows development checkpoint — 2026-09-10
 
-This is a local development snapshot, not a published Windows release.
-The application is built from the user's matching local Codex installation.
+The [Windows installer](https://github.com/Quegenx/codex-hebrew/releases/tag/windows-26.903.8094.0)
+is built from commit `051bca6b94d7247c45a67208cdc4a69246b430ab`, before the
+later Installed Apps display-label adjustment. The published EXE matches the
+SHA-256 recorded in `reports/WINDOWS_INSTALLER.md`; it was not rebuilt on macOS.
 
 ## Preserved in source
 
@@ -59,12 +61,9 @@ source and signed-out Hebrew/RTL startup and reload. Native unit checks cover
 rollback, removal of a managed fixture, profile preservation and deep paths
 with Windows long-path policy disabled. See `reports/WINDOWS_INSTALLER.md`.
 
-Before a public Windows release, complete a fresh-machine build/install check,
+Remaining unverified checks: a fresh-machine build/install check,
 interactive installation/removal with real Windows shell registration,
 signed-in workflow testing, and verification of taskbar appearance and relaunch.
 The EXE is unsigned. The target is pinned to Windows package
 26.903.8094.0; later upstream versions require a new compatibility check.
-Follow `NOTICE.md` when deciding what to distribute. PR #1 has been merged.
-PR #2 adds the installer source, including the upstream platform compatibility
-fixes. The installer binary is
-a local deliverable and has not been uploaded as a GitHub release.
+Follow `NOTICE.md` when deciding what to distribute. PRs #1 and #2 are merged.

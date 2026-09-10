@@ -4,7 +4,19 @@
 
 התאמה קהילתית ולא רשמית של ChatGPT Desktop לעברית ולממשק מימין לשמאל.
 
+**[הורדת המתקין ל־Windows x64](https://github.com/Quegenx/codex-hebrew/releases/download/windows-26.903.8094.0/Codex-Hebrew-Setup-26.903.8094.0.exe)**
+
 **[הורדת המתקין למק — Apple Silicon](https://github.com/Quegenx/codex-hebrew/releases/download/v0.1.1/Codex-Hebrew-macOS-arm64.dmg)**
+
+## התקנה ב־Windows
+
+הורידו ופתחו את קובץ ה־EXE ולחצו **התקנה**. לאחר ההתקנה פתחו **Codex Hebrew** משולחן העבודה או מתפריט ההתחלה.
+
+נדרש Windows x64 עם Codex המקורי בגרסה <code dir="ltr">26.903.8094.0</code>. המתקין אינו חתום דיגיטלית. אפשר לבחור להשתמש בשיחות ובפרויקטים הקיימים; במצב זה יש לסגור את Codex המקורי לפני פתיחת היישום העברי.
+
+לעדכון, סגרו את היישום והריצו את המתקין החדש. להסרה, הסירו את **Codex Hebrew** דרך רשימת היישומים המותקנים ב־Windows. השיחות והפרופיל נשמרים.
+
+## התקנה במק
 
 1. הורידו ופתחו את קובץ ה־DMG.
 2. הפעילו את **<span dir="ltr">Install Codex Hebrew</span>** ולחצו **<span dir="ltr">Install</span>**.
