@@ -1,7 +1,7 @@
-# Windows preview
+# Windows support
 
 This port targets Windows x64 Codex package `26.903.8094.0`, whose ASAR reports
-application version `26.903.61454`. It is an experimental local adaptation.
+application version `26.903.61454`.
 `config/windows-target.json` pins the original ASAR hash and verified React/Radix
 exports. Other versions fail before copying the application.
 
@@ -94,12 +94,13 @@ It only updates existing shortcuts with the Codex application ID and a target
 in this application or the known old Codex RTL path. It preserves the ID, saves
 the old shortcuts under `shortcut-backups`, and leaves unrelated shortcuts
 unchanged. Repeating it makes no further changes. This is a repair utility;
-fresh shortcut creation and taskbar pinning belong to the future installer.
+the EXE installer creates new desktop and Start menu shortcuts. Taskbar pinning
+is left to the user.
 
 Local verification extracted the launcher's embedded icon and the running
 window's native icon, then compared them with the ICO artwork. Hebrew and RTL
 reattached after startup reload in a separate signed-out profile. The current
-suite passed 66 tests, with one macOS integration test skipped.
+suite passed 68 tests, with one macOS integration test skipped.
 
 ## Conversation width and summary controls
 
@@ -125,13 +126,16 @@ The renderer receives 30,832 translations; 187 native menu IDs are translated.
 macOS-specific hardcoded labels, marketplace source rewrites and bundled skill
 metadata are not ported. The original translation wording remains unchanged.
 
-The shared runtime now checks for later IntlProvider replacement: asynchronous
-locale-resource loading otherwise discards the initial Hebrew catalog. No user
-message text is translated or reordered.
+The Windows renderer checks for later IntlProvider replacement: asynchronous
+locale-resource loading otherwise discards the initial Hebrew catalog. The build
+records its platform in the renderer options. Provider polling and summary
+controls/styles are enabled only for Windows; macOS stops provider discovery
+after attachment and keeps its existing summary layout. No user message text
+is translated or reordered.
 
 ## Verification performed
 
-On Windows, `bun test` passed 66 tests and skipped the integration test requiring
+On Windows, `bun test` passed 68 tests and skipped the integration test requiring
 the macOS installation. `bun run check:structure` passed. The icon test used the
 bundled Python with Pillow via `CODEX_HEBREW_PYTHON`.
 

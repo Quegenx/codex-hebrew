@@ -31,7 +31,7 @@ and removal of the unrelated Codex RTL installation were local maintenance.
 
 ## Evidence and remaining release work
 
-The Bun suite passes 67 tests, with one macOS integration test skipped. Structure
+The Bun suite passes 68 tests, with one macOS integration test skipped. Structure
 validation passes. The previous isolated signed-out runtime proof checked Hebrew,
 RTL and reload. Embedded and native-window icons matched the ICO pixels. Shared
 profile startup was confirmed by the user. The taskbar shortcut paths and icon
@@ -64,6 +64,7 @@ interactive installation/removal with real Windows shell registration,
 signed-in workflow testing, and verification of taskbar appearance and relaunch.
 The EXE is an unsigned preview. The target is pinned to Windows package
 26.903.8094.0; later upstream versions require a new compatibility check.
-Follow `NOTICE.md` when deciding what to distribute. Source is maintained on
-`YossiBenagou:windows-hebrew-preview` with upstream PR #1; the installer binary
-is a local deliverable and has not been uploaded as a GitHub release.
+Follow `NOTICE.md` when deciding what to distribute. PR #1 has been merged.
+The installer source is maintained on `YossiBenagou:windows-exe-installer`,
+including the upstream platform compatibility fixes. The installer binary is
+a local deliverable and has not been uploaded as a GitHub release.

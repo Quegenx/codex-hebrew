@@ -4,6 +4,7 @@ export function createSummaryPanelAdapter({translations,attr}) {
  for(const prefix of ['localConversation','chatgptConversations'])for(const suffix of ['toggle','togglePinned']){
   const label=translations[`${prefix}.summaryPanel.${suffix}`];if(label)labels.add(label);
  }
+ const summaryToggleOpen=button=>(button?.getAttribute('aria-expanded')??button?.getAttribute('aria-pressed'))==='true';
  const userContent='[data-message-author-role],[data-markdown-text-tone],[data-markdown-text-style],pre,code';
  const additions=new Set(),closeButtons=new Set(),toggles=new Set();
  const nativeToggle=()=>[...toggles].find(button=>button.isConnected&&
@@ -26,10 +27,10 @@ export function createSummaryPanelAdapter({translations,attr}) {
     const toolbar=document.createElement('div');toolbar.setAttribute('data-rtl-summary-toolbar','');
     const title=document.createElement('span');title.textContent='פלטים ומקורות';
     const close=document.createElement('button');close.type='button';close.setAttribute('data-rtl-summary-close','');close.setAttribute('aria-label','סגירת פלטים ומקורות');close.title='סגירת פלטים ומקורות';close.textContent='×';
-    close.onclick=()=>{const toggle=nativeToggle();if(toggle?.getAttribute('aria-pressed')==='true'){toggle.click();toggle.focus({preventScroll:true});}};
+    close.onclick=()=>{const toggle=nativeToggle();if(summaryToggleOpen(toggle)){toggle.click();toggle.focus({preventScroll:true});}};
     toolbar.append(title,close);card.prepend(toolbar);additions.add(toolbar);closeButtons.add(close);
    }
-   const open=nativeToggle()?.getAttribute('aria-pressed')==='true';
+   const open=summaryToggleOpen(nativeToggle());
    for(const close of closeButtons){
     if(!close.isConnected){close.onclick=null;closeButtons.delete(close);continue;}
     const tabIndex=open&&window.getComputedStyle(close).pointerEvents!=='none'?0:-1;

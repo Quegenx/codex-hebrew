@@ -49,24 +49,24 @@ html[data-chatgpt-rtl] [data-rtl-scrollbar-right] {
 html[data-chatgpt-rtl] [data-rtl-scrollbar-right] > * {
   direction: rtl;
 }
-/* Summary cards move to the left in RTL; Motion's physical x stays negative.
+/* The pinned Windows summary cards move to the left in RTL; Motion's physical x stays negative.
    Its unsigned live shift mirrors both the thread body and composer together,
    and returns to zero through the native close/resize animation. */
-html[data-chatgpt-rtl] .right-0[class*="--thread-floating-content-top-inset"] {
+html[data-chatgpt-rtl][data-rtl-windows-summary] .right-0[class*="--thread-floating-content-top-inset"] {
   right: auto;
   inset-inline-start: auto;
   inset-inline-end: 0;
 }
-html[data-chatgpt-rtl] .thread-scroll-container > [style*="--thread-wide-block-inline-shift"] {
+html[data-chatgpt-rtl][data-rtl-windows-summary] .thread-scroll-container > [style*="--thread-wide-block-inline-shift"] {
   transform: translateX(var(--thread-wide-block-inline-shift, 0px)) !important;
 }
-html[data-chatgpt-rtl] [data-rtl-summary-toggle] {
+html[data-chatgpt-rtl][data-rtl-windows-summary] [data-rtl-summary-toggle] {
   aspect-ratio: auto;
   width: auto;
   padding-inline: 0.5rem !important;
   gap: 0.375rem;
 }
-html[data-chatgpt-rtl] [data-rtl-summary-toolbar] {
+html[data-chatgpt-rtl][data-rtl-windows-summary] [data-rtl-summary-toolbar] {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -75,7 +75,7 @@ html[data-chatgpt-rtl] [data-rtl-summary-toolbar] {
   font-size: 0.75rem;
   color: var(--color-text-secondary);
 }
-html[data-chatgpt-rtl] [data-rtl-summary-close] {
+html[data-chatgpt-rtl][data-rtl-windows-summary] [data-rtl-summary-close] {
   display: grid;
   place-items: center;
   width: 1.75rem;
@@ -85,10 +85,10 @@ html[data-chatgpt-rtl] [data-rtl-summary-close] {
   font-size: 1.25rem;
   line-height: 1;
 }
-html[data-chatgpt-rtl] [data-rtl-summary-close]:hover {
+html[data-chatgpt-rtl][data-rtl-windows-summary] [data-rtl-summary-close]:hover {
   background: var(--color-background-button-tertiary-hover);
 }
-html[data-chatgpt-rtl] [data-rtl-summary-close]:focus-visible {
+html[data-chatgpt-rtl][data-rtl-windows-summary] [data-rtl-summary-close]:focus-visible {
   outline: 2px solid var(--color-border-focus);
   outline-offset: 1px;
 }
