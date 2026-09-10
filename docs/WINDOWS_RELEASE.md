@@ -11,6 +11,7 @@ The application is built from the user's matching local Codex installation.
 - Windows icon artwork, generation, launcher embedding and window integration.
 - Existing-shortcut repair that preserves the Codex AppUserModelID.
 - Runtime tests, launcher self-check and documented compatibility limits.
+- Summary close/reopen controls and matching RTL thread/composer displacement.
 
 See `WINDOWS.md` for the build and verification commands. During development,
 only changed runtime files or the launcher may be deployed to the local app.
@@ -28,12 +29,19 @@ and removal of the unrelated Codex RTL installation were local maintenance.
 
 ## Evidence and remaining release work
 
-The Bun suite passes 65 tests, with one macOS integration test skipped. Structure
+The Bun suite passes 66 tests, with one macOS integration test skipped. Structure
 validation passes. The previous isolated signed-out runtime proof checked Hebrew,
 RTL and reload. Embedded and native-window icons matched the ICO pixels. Shared
 profile startup was confirmed by the user. The taskbar shortcut paths and icon
 references were repaired and read back; the final taskbar appearance after
 restart still needs visual confirmation.
+
+The summary layout update was built through `buildRendererInjection`, deployed
+as `hebrew-runtime/renderer.js`, and the runtime manifest and build-report hashes
+were refreshed. The launcher and ASAR did not need rebuilding for this renderer
+change. An isolated signed-in proof checked wide and narrow layouts, native
+close/reopen behavior, focus return and reload; see `reports/WINDOWS_LAYOUT.md`.
+Only source and sanitized measurements are included in the source archive.
 
 The local shortcut integration check passed preview-only behavior, identity and
 icon preservation, backup integrity, leaving unrelated links untouched, and

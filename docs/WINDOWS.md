@@ -97,7 +97,21 @@ fresh shortcut creation and taskbar pinning belong to the future installer.
 Local verification extracted the launcher's embedded icon and the running
 window's native icon, then compared them with the ICO artwork. Hebrew and RTL
 reattached after startup reload in a separate signed-out profile. The current
-suite passed 65 tests, with one macOS integration test skipped.
+suite passed 66 tests, with one macOS integration test skipped.
+
+## Conversation width and summary controls
+
+The header's `פלטים ומקורות` button opens and closes the existing summary panel.
+The panel also has an accessible close button. Closing releases the space
+reserved by Codex and restores keyboard focus to the header button. The native
+pin preference is retained, including across reloads; there is no separate
+Hebrew preference or copy of the summary data.
+
+At intermediate widths, the thread and composer move right to make room for
+the summary on the left. In a narrow window, the native popover opens on demand
+without reserving a column. `ui/summary-panel.js` and `ui/rtl.css` are included
+automatically by `build:windows-wrapper`. See `reports/WINDOWS_LAYOUT.md` for
+the scoped signed-in verification and its limits.
 
 ## Compatibility
 
@@ -115,7 +129,7 @@ message text is translated or reordered.
 
 ## Verification performed
 
-On Windows, `bun test` passed 65 tests and skipped the integration test requiring
+On Windows, `bun test` passed 66 tests and skipped the integration test requiring
 the macOS installation. `bun run check:structure` passed. The icon test used the
 bundled Python with Pillow via `CODEX_HEBREW_PYTHON`.
 
@@ -125,8 +139,10 @@ verified Hebrew sign-in text, `lang=he`, document RTL, the actual Radix directio
 context, preserved synthetic mixed-direction content, LTR code, and reattachment
 after reload. The script saves a screenshot for visual inspection. It never
 submits a message, signs in, or calls a model. The normal launcher has no debugging
-port. Signed-in conversations, plugins, native window interactions and all
-settings pages remain unverified. macOS runtime regression testing was not run.
+port. A later signed-in check covered summary controls, conversation layout and
+reload, as recorded in `reports/WINDOWS_LAYOUT.md`. Broader signed-in workflows,
+plugins, native window interactions and settings pages remain unverified.
+macOS runtime regression testing was not run.
 
 The application copy is for use with the user's locally installed software.
 Share the source changes, not the copied proprietary application files; see
