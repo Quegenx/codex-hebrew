@@ -45,62 +45,66 @@ function install({runtimeRoot, sourceArchiveSha256, electron = require('electron
   };
 
   const OriginalBrowserWindow = electron.BrowserWindow;
-  class HebrewBrowserWindow extends OriginalBrowserWindow {
-    constructor(options = {}) {
+  // Owl's native window registry rejects subclass instances, dropping app-wide
+  // project/state broadcasts. Decorate a native instance without changing its identity.
+  const HebrewBrowserWindow = new Proxy(OriginalBrowserWindow, {
+    construct(Constructor, [options = {}, ...rest], newTarget) {
       const target = path.basename(options.webPreferences?.preload || '') === 'preload.js';
       const requestedOnConstruction = target && options.show !== false;
-      super(target ? {...options, show: false, ...(windowsIcon ? {icon: windowsIcon} : {})} : options);
-      if (!target) return;
-      if (windowsIcon && windowAppId && fs.existsSync(launcherPath) && typeof this.setAppDetails === 'function') {
+      const nativeOptions = target ? {...options, show: false, ...(windowsIcon ? {icon: windowsIcon} : {})} : options;
+      const window = Reflect.construct(Constructor, [nativeOptions, ...rest], newTarget === HebrewBrowserWindow ? Constructor : newTarget);
+      if (!target) return window;
+      if (windowsIcon && windowAppId && fs.existsSync(launcherPath) && typeof window.setAppDetails === 'function') {
         try {
-          this.setAppDetails({appId: windowAppId, appIconPath: launcherPath, appIconIndex: 0, relaunchCommand: `"${launcherPath}"`, relaunchDisplayName: 'Codex Hebrew'});
+          window.setAppDetails({appId: windowAppId, appIconPath: launcherPath, appIconIndex: 0, relaunchCommand: `"${launcherPath}"`, relaunchDisplayName: 'Codex Hebrew'});
         } catch (error) {
           console.warn('[chatgpt-hebrew] Window relaunch details unavailable', error);
         }
       }
 
-      const actualShow = this.show.bind(this);
-      const actualShowInactive = this.showInactive.bind(this);
+      const actualShow = window.show.bind(window);
+      const actualShowInactive = window.showInactive.bind(window);
       let requestedShow = requestedOnConstruction ? actualShow : null;
       let startupReleased = false;
       let startupReloaded = false;
-      this.show = () => { requestedShow = actualShow; };
-      this.showInactive = () => { requestedShow = actualShowInactive; };
+      window.show = () => { requestedShow = actualShow; };
+      window.showInactive = () => { requestedShow = actualShowInactive; };
       const releaseStartup = () => {
         if (startupReleased) return;
         startupReleased = true;
-        this.show = actualShow;
-        this.showInactive = actualShowInactive;
+        window.show = actualShow;
+        window.showInactive = actualShowInactive;
         requestedShow?.();
       };
 
-      this.webContents.on('dom-ready', () => {
-        if (!isChatGPTRenderer(this.webContents.getURL())) {
+      window.webContents.on('dom-ready', () => {
+        if (!isChatGPTRenderer(window.webContents.getURL())) {
           releaseStartup();
           return;
         }
-        void this.webContents.executeJavaScript(rendererSource, true).then(result => {
-          windowStatuses.set(this.webContents.id, {webContentsId: this.webContents.id, ...result});
-          events.push({type: 'attached', webContentsId: this.webContents.id, at: new Date().toISOString()});
+        void window.webContents.executeJavaScript(rendererSource, true).then(result => {
+          windowStatuses.set(window.webContents.id, {webContentsId: window.webContents.id, ...result});
+          events.push({type: 'attached', webContentsId: window.webContents.id, at: new Date().toISOString()});
           writeStatus();
-          if (!startupReloaded && typeof this.webContents.reload === 'function') {
+          if (!startupReloaded && typeof window.webContents.reload === 'function') {
             startupReloaded = true;
-            this.webContents.reload();
+            window.webContents.reload();
             return;
           }
           releaseStartup();
         }).catch(error => {
           console.error('[chatgpt-hebrew] Renderer injection failed', error);
-          void this.webContents.executeJavaScript("document.getElementById('chatgpt-hebrew-boot')?.remove()", true).finally(releaseStartup);
+          void window.webContents.executeJavaScript("document.getElementById('chatgpt-hebrew-boot')?.remove()", true).finally(releaseStartup);
         });
       });
-      this.webContents.once('destroyed', () => {
-        windowStatuses.delete(this.webContents.id);
-        events.push({type: 'destroyed', webContentsId: this.webContents.id, at: new Date().toISOString()});
+      window.webContents.once('destroyed', () => {
+        windowStatuses.delete(window.webContents.id);
+        events.push({type: 'destroyed', webContentsId: window.webContents.id, at: new Date().toISOString()});
         writeStatus();
       });
+      return window;
     }
-  }
+  });
   const applicationProxy = new Proxy(electron.app, {get(target, property) {
     if(property === 'getLocale') return () => 'he';
     if(property === 'getPreferredSystemLanguages') return () => ['he'];

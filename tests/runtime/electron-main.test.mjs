@@ -17,8 +17,11 @@ function fixture({argv=['electron','application','--user-data-dir=/fixture-profi
  fs.writeFileSync(path.join(runtimeRoot,'native-chrome-he.json'),'{}');
  fs.writeFileSync(path.join(runtimeRoot,'native-chrome-hook.cjs'),'exports.installNativeChrome=()=>{};');
  let resolveInjection,nextId=6,userData='/fixture-profile',relaunched=null,exitCode=null;
+ const windows=[];
  class BrowserWindow {
-  constructor(options){this.options=options;this.showCount=0;this.inactiveCount=0;this.webContents=new EventEmitter();this.webContents.id=++nextId;this.webContents.getURL=()=>this.url||'app://-/index.html';this.webContents.executeJavaScript=(source,userGesture)=>{this.executed={source,userGesture};return new Promise(resolve=>{resolveInjection=resolve;});};if(automaticReload){this.webContents.reloadCount=0;this.webContents.reload=()=>{this.webContents.reloadCount++;setTimeout(()=>this.webContents.emit('dom-ready'),0);};}}
+  constructor(options){windows.push(this);this.options=options;this.showCount=0;this.inactiveCount=0;this.webContents=new EventEmitter();this.webContents.id=++nextId;this.webContents.getURL=()=>this.url||'app://-/index.html';this.webContents.executeJavaScript=(source,userGesture)=>{this.executed={source,userGesture};return new Promise(resolve=>{resolveInjection=resolve;});};if(automaticReload){this.webContents.reloadCount=0;this.webContents.reload=()=>{this.webContents.reloadCount++;setTimeout(()=>this.webContents.emit('dom-ready'),0);};}}
+  // Owl excludes subclass instances from its native BrowserWindow registry.
+  static getAllWindows(){return windows.filter(window=>window.constructor===BrowserWindow);}
   show(){this.showCount++;}
   showInactive(){this.inactiveCount++;}
   setAppDetails(options){this.appDetails=options;}
@@ -27,10 +30,22 @@ function fixture({argv=['electron','application','--user-data-dir=/fixture-profi
  const electron={BrowserWindow,app:{setAppUserModelId(){},setPath(name,value){if(name==='userData')userData=value;},getPath(name){if(name==='userData')return userData;},relaunch(options){relaunched=options;},exit(code){exitCode=code;}}};
  const runtime=require('../../runtime/electron-main.cjs').install({runtimeRoot,sourceArchiveSha256:'archive',electron,argv});
  electron.app.setAppUserModelId('original.app.id');
- return{runtimeRoot,BrowserWindow:runtime.BrowserWindow,profilePath:runtime.profilePath,runtime,get relaunched(){return relaunched;},get exitCode(){return exitCode;},resolve:value=>resolveInjection(value)};
+ return{runtimeRoot,NativeBrowserWindow:BrowserWindow,BrowserWindow:runtime.BrowserWindow,profilePath:runtime.profilePath,runtime,get relaunched(){return relaunched;},get exitCode(){return exitCode;},resolve:value=>resolveInjection(value)};
 }
 
 describe('main-process renderer injection',()=>{
+ test('keeps Hebrew windows in the native registry so project updates reach the renderer',()=>{
+  const state=fixture(),window=new state.BrowserWindow({webPreferences:{preload:'/app/preload.js'}});
+  expect(window.constructor).toBe(state.NativeBrowserWindow);
+  expect(state.NativeBrowserWindow.getAllWindows()).toEqual([window]);
+  expect(state.BrowserWindow.getAllWindows()).toEqual([window]);
+  const updates=[];
+  window.webContents.on('message',message=>updates.push(message));
+  for(const type of ['global-state-updated','workspace-root-options-updated']){
+   for(const registered of state.NativeBrowserWindow.getAllWindows())registered.webContents.emit('message',{type});
+  }
+  expect(updates).toEqual([{type:'global-state-updated'},{type:'workspace-root-options-updated'}]);
+ });
  test.skipIf(process.platform!=='win32')('starts with the Hebrew icon when Owl has no setAppDetails API',()=>{
   const state=fixture({windowsIcon:true,appDetailsAvailable:false});
   const window=new state.BrowserWindow({webPreferences:{preload:'/app/preload.js'}});
@@ -88,6 +103,7 @@ describe('main-process renderer injection',()=>{
 
  test('leaves non-ChatGPT windows unchanged',()=>{
   const state=fixture(),window=new state.BrowserWindow({show:true,webPreferences:{preload:'/app/browser-page-preload.js'}});
+  expect(window.constructor).toBe(state.NativeBrowserWindow);expect(state.NativeBrowserWindow.getAllWindows()).toEqual([window]);
   expect(window.options.show).toBe(true);window.show();expect(window.showCount).toBe(1);expect(window.executed).toBeUndefined();
  });
 });

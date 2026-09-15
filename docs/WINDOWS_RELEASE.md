@@ -1,5 +1,19 @@
 # Windows development checkpoint — 2026-09-10
 
+## Project refresh update — 2026-09-15
+
+The main-process adapter now preserves native window identity so project-change
+notifications reach the Hebrew sidebar. The maintained source feeds both wrapper
+builds. The local Windows installation received only `hebrew-runtime/main.cjs`,
+with a small backup and refreshed manifest/build-report hashes; one full exit and
+relaunch activates it. Existing profile paths and conversation data are unchanged.
+The Bun suite passes 69 tests with one existing skip, and structure validation
+passes. An isolated real project-creation RPC delivered both refresh events to
+the renderer without navigation. See
+[`reports/WINDOWS_PROJECT_REFRESH.md`](../reports/WINDOWS_PROJECT_REFRESH.md)
+for the evidence and signed-in/macOS verification limits. The published EXE
+below predates this fix and has not been replaced.
+
 The [Windows installer](https://github.com/Quegenx/codex-hebrew/releases/tag/windows-26.903.8094.0)
 is built from commit `051bca6b94d7247c45a67208cdc4a69246b430ab`, before the
 later Installed Apps display-label adjustment. The published EXE matches the
