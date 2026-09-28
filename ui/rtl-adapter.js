@@ -1,7 +1,7 @@
 import {createSummaryPanelAdapter} from './summary-panel.js';
 
 // Reversible renderer adapter. Only explicit message IDs are translated.
-export function installRTL({css, platform, locale='he', translations={}, directionalIcons=[]} = {}) {
+export function installRTL({css, platform, physicalOverlay=false, locale='he', translations={}, directionalIcons=[]} = {}) {
   window.chatgptRTL?.stop();
   const html = document.documentElement;
   const originals = [];
@@ -49,6 +49,7 @@ export function installRTL({css, platform, locale='he', translations={}, directi
   function apply(scope=document) {
     const query=selector=>scope===document?[...document.querySelectorAll(selector)]:[...(scope.matches?.(selector)?[scope]:[]),...scope.querySelectorAll(selector)];
     summaryPanel?.apply(query);
+    if(physicalOverlay)for(const label of query('[data-avatar-overlay-activity-text],[data-avatar-overlay-native-surface-id="realtime-caption"],[data-avatar-overlay-native-surface-id="voice-status"]'))attr(label,'dir','auto');
     if(scope===document){attr(html,'dir','rtl');attr(html,'lang',locale);attr(html,'data-chatgpt-rtl','');}
     for(const menu of query('[role="menu"],[role="menubar"]')) attr(menu,'dir','rtl');
     for(const technical of query('[data-codex-terminal],[data-codex-xterm],dil-renderer,.xterm,.monaco-editor,.cm-editor')) attr(technical,'dir','ltr');
