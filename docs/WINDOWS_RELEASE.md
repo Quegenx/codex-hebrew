@@ -1,5 +1,12 @@
 # Windows development checkpoint — 2026-09-10
 
+PRs #3 and #4 were reviewed and merged on 2026-09-28. With Bun 1.4.2 on macOS,
+`bun test tests/runtime/electron-main.test.mjs tests/rtl` passed 38 tests with
+two Windows-only skips; `bun run check:structure` and `git diff --check` passed.
+Full `bun test`: 68 passed, three skipped, one failed because the required
+`/Applications/ChatGPT.app/Contents/Resources/app.asar` is absent. That failure
+also occurs on unchanged main. Native macOS/Windows behavior was not rerun.
+
 ## Pet voice update — 2026-09-28
 
 The Windows wrapper keeps the selected pet visible during voice chat and uses
