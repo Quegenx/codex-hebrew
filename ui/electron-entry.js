@@ -14,8 +14,11 @@ window.installChatGPTHebrew = function(options) {
   let timer = null;
   let status = 'waiting-for-provider';
   let direction={status:()=>({state:'loading'}),stop(){}};
-  const styles=installStyles(options.styles);
-  const rtl = installRTL({platform:options.platform,css:options.css,locale:options.locale || 'he',translations:options.translations,directionalIcons:options.directionalIcons||options.direction?.directionalIcons});
+  // Native pet geometry mixes inline physical positions with stylesheet offsets.
+  // Keep its original coordinate system; text and menus still receive Hebrew RTL.
+  const physicalOverlay=options.platform==='win32'&&new URLSearchParams(window.location.search).get('initialRoute')==='/avatar-overlay';
+  const styles=installStyles(physicalOverlay?{}:options.styles);
+  const rtl = installRTL({platform:options.platform,physicalOverlay,css:options.css,locale:options.locale || 'he',translations:options.translations,directionalIcons:options.directionalIcons||options.direction?.directionalIcons});
   function apply() {
     const root = window.__codexRoot?._internalRoot?.current;
     if (!root) {status='unsupported-react-root';return;}

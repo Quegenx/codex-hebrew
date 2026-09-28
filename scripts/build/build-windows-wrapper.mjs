@@ -9,6 +9,7 @@ import {createWindowsCatalog} from '../translation/windows-catalog.mjs';
 import {buildRendererInjection} from './renderer-injection.mjs';
 import {findAndPatchModelPickerRTL} from '../rtl/model-picker-rtl.mjs';
 import {findAndPatchPetSizeRTL} from '../rtl/pet-size-rtl.mjs';
+import {findAndPatchPetVoicePresentation} from '../rtl/pet-voice-presentation.mjs';
 
 const root=fileURLToPath(new URL('../../',import.meta.url));
 const supported=JSON.parse(fs.readFileSync(path.join(root,'config/windows-target.json'),'utf8'));
@@ -45,10 +46,10 @@ export async function buildWindowsWrapper({executable,destination}){
  const translations=new Map(catalog.messages.map(message=>[message.id,message.translation]));
  const aliases={'electron.appMenu.file.newWindow':'codex.commandMenuTitle.newWindow'};
  const nativeLocale=Object.fromEntries(scan.nativeMessageIds.flatMap(id=>{const value=translations.get('@messageId:'+id)||translations.get(id)||translations.get(aliases[id]);return value?[[id,value]]:[];}));
- const modelPicker=findAndPatchModelPickerRTL(archive),petSize=findAndPatchPetSizeRTL(archive);
+ const modelPicker=findAndPatchModelPickerRTL(archive),petSize=findAndPatchPetSizeRTL(archive),petVoice=findAndPatchPetVoicePresentation(archive);
  const html=archive.read('webview/index.html');
  if(!html.includes('<html lang="en"')||!html.includes('<head>'))throw Error('Windows HTML bootstrap changed.');
- const changes={'package.json':JSON.stringify(metadata),'codex-he-loader.cjs':loader,'native-menu-locales/he.json':JSON.stringify(nativeLocale),[modelPicker.file]:modelPicker.source,[petSize.file]:petSize.source,'webview/index.html':html.replace('<html lang="en"','<html lang="he" dir="rtl"').replace('<head>','<head><style id="chatgpt-hebrew-boot">html{visibility:hidden}</style>')};
+ const changes={'package.json':JSON.stringify(metadata),'codex-he-loader.cjs':loader,'native-menu-locales/he.json':JSON.stringify(nativeLocale),[modelPicker.file]:modelPicker.source,[petSize.file]:petSize.source,[petVoice.file]:petVoice.source,'webview/index.html':html.replace('<html lang="en"','<html lang="he" dir="rtl"').replace('<head>','<head><style id="chatgpt-hebrew-boot">html{visibility:hidden}</style>')};
  fs.mkdirSync(output,{recursive:true});
  console.log('Copying the installed application to the isolated output...');
  // MSIX directories reject Bun's directory enumeration on this Windows build.

@@ -38,6 +38,25 @@ test('renderer attachment preserves Mac idle behavior and Windows locale reattac
   w.chatgptHebrew.stop();
   expect(provider.state.intl).toBe(loaded);
   expect(intervals.size).toBe(0);
+  // Pet layout uses physical positions; Hebrew captions and menus keep their direction.
+  w.happyDOM.setURL('app://-/index.html?initialRoute=%2Favatar-overlay');
+  const link=w.document.createElement('link');link.rel='stylesheet';link.href='/assets/pet.css';link.disabled=false;w.document.head.append(link);
+  w.document.body.innerHTML='<main dir="ltr" data-hebrew-pet-layout><span data-avatar-overlay-activity-text="title">שיחה חדשה</span><div data-avatar-overlay-native-surface-id="realtime-caption">שלום English</div></main><div role="menu"></div>';
+  const petOptions={...options,platform:'win32',styles:{'/assets/pet.css':'.control{translate:50% 0}','/assets/lazy.css':'.badge{inset-inline-end:0}'}};
+  w.installChatGPTHebrew(petOptions);
+  expect(link.disabled).toBe(false);
+  expect(w.document.querySelector('main').dir).toBe('ltr');
+  expect(w.document.querySelector('[data-avatar-overlay-activity-text]').dir).toBe('auto');
+  expect(w.document.querySelector('[data-avatar-overlay-native-surface-id]').dir).toBe('auto');
+  expect(w.document.querySelector('[role=menu]').dir).toBe('rtl');
+  const lazy=w.document.createElement('link');lazy.rel='stylesheet';lazy.href='/assets/lazy.css';lazy.disabled=false;w.document.head.append(lazy);
+  await new Promise(resolve=>setTimeout(resolve,0));
+  expect(lazy.disabled).toBe(false);expect(w.chatgptHebrew.status().styles.replacedStylesheets).toBe(0);
+  w.chatgptHebrew.stop();expect(w.document.querySelector('[data-avatar-overlay-activity-text]').hasAttribute('dir')).toBe(false);
+  w.happyDOM.setURL('app://-/index.html');
+  w.installChatGPTHebrew(petOptions);
+  expect(link.disabled).toBe(true);expect(lazy.disabled).toBe(true);
+  w.chatgptHebrew.stop();expect(link.disabled).toBe(false);
  }finally{
   w.chatgptHebrew?.stop();
   await w.happyDOM.abort();

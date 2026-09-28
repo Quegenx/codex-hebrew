@@ -1,5 +1,20 @@
 # Windows development checkpoint — 2026-09-10
 
+## Pet voice update — 2026-09-28
+
+The Windows wrapper keeps the selected pet visible during voice chat and uses
+physical coordinates for the native pet overlay, with Hebrew text direction.
+This fixes overlapping voice controls and activity notifications. The build
+includes the guarded overlay asset patch and renderer changes. See
+[`reports/WINDOWS_PET_VOICE.md`](../reports/WINDOWS_PET_VOICE.md) for the 71 passing
+tests, eight native UI scenarios, and live-audio/macOS verification limits.
+
+Local deployment stages the changed ASAR, renderer and matching metadata while
+the app is running. A task-local updater waits for full exit before replacing
+them together, retains a backup and reopens the existing launcher. Conversation
+data and shared profile settings are preserved. The previously published EXE
+does not contain this update.
+
 ## Project refresh update — 2026-09-15
 
 The main-process adapter now preserves native window identity so project-change
