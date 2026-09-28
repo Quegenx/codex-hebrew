@@ -4,7 +4,7 @@
 
 התאמה קהילתית ולא רשמית של ChatGPT Desktop לעברית ולממשק מימין לשמאל.
 
-**[הורדת המתקין ל־Windows x64](https://github.com/Quegenx/codex-hebrew/releases/download/windows-26.903.8094.0/Codex-Hebrew-Setup-26.903.8094.0.exe)**
+**[הורדת המתקין ל־Windows x64](https://github.com/Quegenx/codex-hebrew/releases/download/windows-26.903.8094.0-r2/Codex-Hebrew-Setup-26.903.8094.0.exe)**
 
 **[הורדת המתקין למק — Apple Silicon](https://github.com/Quegenx/codex-hebrew/releases/download/v0.1.1/Codex-Hebrew-macOS-arm64.dmg)**
 

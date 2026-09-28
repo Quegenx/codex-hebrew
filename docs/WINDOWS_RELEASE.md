@@ -1,5 +1,24 @@
 # Windows development checkpoint — 2026-09-10
 
+## Published installer update — 2026-09-28
+
+[Revision 2](https://github.com/Quegenx/codex-hebrew/releases/tag/windows-26.903.8094.0-r2)
+includes PRs #3 and #4, built from `462b6fe3f2fec1a0c81c9bd1f37082875ffec34c`
+on a GitHub-hosted Windows 2022 runner with Bun 1.4.2 and .NET Framework.
+[Build log](https://github.com/Quegenx/codex-hebrew/actions/runs/36471400418):
+`bun test` passed 71 tests with one macOS-only skip; `bun run check:structure`
+passed. `build:windows-installer` verified its ASAR delta roundtrip, and
+`check-windows-installer.ps1` passed fresh installation, update, payload hashes,
+shared-data preservation, unsupported-source rejection and original-ASAR preservation.
+The input MSIX from the wmzhe mirror passed Windows SDK signature verification
+through Microsoft Marketplace, package identity/version and the pinned ASAR hash.
+No original application or private profiles were uploaded. The EXE is 1,549,824
+bytes; SHA-256 `67d1f50c15defe5814c1b89173b888dd4c2837731c041d104459be768cd3459c`.
+Interactive shell installation and live audio remain unverified by this run.
+Future remote builds use the manual `Build Windows installer` Actions workflow
+with an HTTPS URL for the matching signed MSIX; successful runs retain only the
+installer and verification files. The earlier checks below describe prior artifacts.
+
 PRs #3 and #4 were reviewed and merged on 2026-09-28. With Bun 1.4.2 on macOS,
 `bun test tests/runtime/electron-main.test.mjs tests/rtl` passed 38 tests with
 two Windows-only skips; `bun run check:structure` and `git diff --check` passed.
