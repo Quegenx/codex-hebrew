@@ -1,5 +1,20 @@
 # Windows development checkpoint — 2026-09-10
 
+## Panel tab close controls — 2026-09-30
+
+Windows source/output tabs now keep a visible close button in its own flex slot,
+including inactive tabs in narrow RTL panels. Long titles shrink within the
+remaining space. The renderer changes feed `build:windows-wrapper`; no additional
+ASAR patch is required for this fix. See
+[`reports/WINDOWS_PANEL_TABS.md`](../reports/WINDOWS_PANEL_TABS.md) for 72 passing
+tests and six native UI scenarios covering 22 tabs.
+
+The renderer and matching metadata were installed locally with verified hashes
+and backups. A full restart activates the renderer cached by the main process.
+The previously pending pet archive update remains queued for full exit. Shared
+profile settings and conversations are preserved. The published revision-2 EXE
+below does not contain the tab change.
+
 ## Published installer update — 2026-09-28
 
 [Revision 2](https://github.com/Quegenx/codex-hebrew/releases/tag/windows-26.903.8094.0-r2)

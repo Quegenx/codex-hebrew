@@ -16,6 +16,7 @@ export function installRTL({css, platform, physicalOverlay=false, locale='he', t
     if (el.getAttribute(name) !== value) el.setAttribute(name,value);
   }
   attr(html,'dir','rtl');attr(html,'lang',locale);attr(html,'data-chatgpt-rtl','');
+  if(platform==='win32')attr(html,'data-rtl-windows-tabs','');
   const summaryPanel=platform==='win32'?createSummaryPanelAdapter({translations,attr}):null;
   if(summaryPanel)attr(html,'data-rtl-windows-summary','');
   const style = document.createElement('style');style.textContent=css;style.dataset.chatgptRTLStyle='';html.append(style);
