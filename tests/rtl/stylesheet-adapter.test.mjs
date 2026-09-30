@@ -4,6 +4,21 @@ import {installStyles} from '../../ui/stylesheet-adapter.js';
 import {installRTL} from '../../ui/rtl-adapter.js';
 import fs from 'node:fs';
 function environment(){const w=new Window({url:'app://-/index.html'});for(const key of ['document','MutationObserver','location'])globalThis[key]=w[key];globalThis.window=w;return w;}
+test('Windows panel tabs keep inactive close buttons visible without changing unrelated buttons',()=>{
+ const w=environment();
+ document.body.innerHTML='<style>.native-close{position:absolute;visibility:hidden;opacity:0;pointer-events:none}</style><div data-app-shell-tab-controller="right"><div data-tab-id="file"><button role="tab"><span class="flex-1">קובץ עם כותרת ארוכה</span></button><button data-app-shell-tab-close-button class="native-close" aria-label="סגירת הכרטיסייה">×</button></div></div><button id="unrelated" class="native-close">Hidden</button>';
+ const css=fs.readFileSync(new URL('../../ui/rtl.css',import.meta.url),'utf8');
+ const close=document.querySelector('[data-app-shell-tab-close-button]');
+ const adapter=installRTL({platform:'win32',css});
+ const style=w.getComputedStyle(close);
+ expect(style.visibility).toBe('visible');expect(style.opacity).toBe('1');expect(style.pointerEvents).toBe('auto');
+ expect(style.position).toBe('static');expect(w.getComputedStyle(document.querySelector('#unrelated')).visibility).toBe('hidden');
+ adapter.stop();expect(w.getComputedStyle(close).visibility).toBe('hidden');expect(document.documentElement.hasAttribute('data-rtl-windows-tabs')).toBe(false);
+ const markup=document.body.innerHTML;w.happyDOM.abort();
+ const mac=environment();document.body.innerHTML=markup;
+ const otherPlatform=installRTL({platform:'darwin',css});expect(mac.getComputedStyle(document.querySelector('[data-app-shell-tab-close-button]')).visibility).toBe('hidden');
+ otherPlatform.stop();mac.happyDOM.abort();
+});
 test('empty search fields and the composer use scoped RTL alignment',()=>{
  const css=fs.readFileSync(new URL('../../ui/rtl.css',import.meta.url),'utf8').replaceAll('\r\n','\n');expect(css).toContain(':placeholder-shown');expect(css).toContain('.ProseMirror[contenteditable="true"]');expect(css).toContain('.ProseMirror .placeholder:after');expect(css).toContain(':has(> p[data-placeholder]:only-child > br.ProseMirror-trailingBreak:only-child) > p[data-placeholder]');expect(css).toContain('unicode-bidi: isolate;\n  text-align: right;');
 });

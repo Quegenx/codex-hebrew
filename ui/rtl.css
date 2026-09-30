@@ -49,6 +49,30 @@ html[data-chatgpt-rtl] [data-rtl-scrollbar-right] {
 html[data-chatgpt-rtl] [data-rtl-scrollbar-right] > * {
   direction: rtl;
 }
+/* Native panel tabs hide narrow/inactive close buttons and position them over
+   the title. Give each close button its own flex slot, including compact RTL
+   strips; long titles must shrink within the remaining space. */
+html[data-rtl-windows-tabs] [data-app-shell-tab-controller] [data-tab-id]:has(> [data-app-shell-tab-close-button]) {
+  min-inline-size: 0;
+  max-inline-size: 100%;
+  overflow: hidden;
+}
+html[data-rtl-windows-tabs] [data-app-shell-tab-controller] [data-tab-id]:has(> [data-app-shell-tab-close-button]) > [role="tab"] {
+  padding-inline-end: 0.25rem !important;
+}
+html[data-rtl-windows-tabs] [data-app-shell-tab-controller] [data-tab-id]:has(> [data-app-shell-tab-close-button]) > [role="tab"] > .flex-1 {
+  padding-inline-end: 0 !important;
+}
+html[data-rtl-windows-tabs] [data-app-shell-tab-controller] [data-app-shell-tab-close-button] {
+  position: static !important;
+  translate: none !important;
+  transform: none !important;
+  flex-shrink: 0;
+  margin-inline-end: 0.375rem;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
 /* The pinned Windows summary cards move to the left in RTL; Motion's physical x stays negative.
    Its unsigned live shift mirrors both the thread body and composer together,
    and returns to zero through the native close/resize animation. */
